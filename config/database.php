@@ -44,7 +44,7 @@ return [
 	|
 	*/
 
-	'connections' => [
+	/*'connections' => [
 
 		'sqlite' => [
 			'driver'   => 'sqlite',
@@ -84,7 +84,45 @@ return [
 			'prefix'   => '',
 		],
 
-	],
+	],*/
+
+	 'connections' => array(
+
+	        # Our primary database connection
+	        'mysql' => array(
+	            'driver'    => 'mysql',
+	            'host'      => 'localhost',
+	            'database'  => 'cosdb',
+	            'username'  => 'root',
+	            'password'  => '',
+	            'charset'   => 'utf8',
+	            'collation' => 'utf8_general_ci',
+	            'prefix'    => '',
+	        ),
+
+	        # Our secondary database connection
+	        'mysql2' => array(
+	            'driver'    => 'mysql',
+	            'host'      => '192.168.9.44',
+	            'database'  => 'cosdb',
+	            'username'  => 'root',
+	            'password'  => '1234',
+	            'charset'   => 'utf8',
+	            'collation' => 'utf8_general_ci',
+	            'prefix'    => '',
+	        ),
+
+	        'mysql3' => array(
+	            'driver'    => 'mysql',
+	            'host'      => 'cosjaspalhome.com',
+	            'database'  => 'cosjaspa_cosdb',
+	            'username'  => 'cosjaspa',
+	            'password'  => 'cos@2015!',
+	            'charset'   => 'utf8',
+	            'collation' => 'utf8_general_ci',
+	            'prefix'    => '',
+	        ),
+	    ),
 
 	/*
 	|--------------------------------------------------------------------------

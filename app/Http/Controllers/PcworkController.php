@@ -10,6 +10,7 @@ use Request;
 use Validator;
 use Carbon;
 use DB;
+use MPDF;
 
 // Model
 use App\Http\Model\Pcwork;
@@ -29,7 +30,7 @@ class PcworkController extends Controller {
 		$pc = Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->get(['emp_name']);
 		//dd($pc);
 		
-		return view('sales.pcwork')->with(array('pcwork'=>$data_pc,
+		return view('commission.pcwork')->with(array('pcwork'=>$data_pc,
 							'emp_code'=>$emp_code
 							));
 	}
@@ -41,7 +42,7 @@ class PcworkController extends Controller {
 	 */
 	public function create($emp_code)
 	{
-		return view('sales.pcwork_create')->with('emp_code',$emp_code);
+		return view('commission.pcwork_create')->with('emp_code',$emp_code);
 	}
 
 	/**
@@ -106,13 +107,13 @@ class PcworkController extends Controller {
 				'refresh'		=> true
 			);
 	
-			return view('sales.pcwork_table')->with($data_pc);
+			return view('commission.pcwork_table')->with($data_pc);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.pcwork_create')->withErrors($validator)->withInput(Request::all())->with('emp_code',Request::get('emp_code'));				
+				return view('commission.pcwork_create')->withErrors($validator)->withInput(Request::all())->with('emp_code',Request::get('emp_code'));				
 			}
 
 			return 0;
@@ -140,7 +141,7 @@ class PcworkController extends Controller {
 	{
 		$edit_data = Pcwork::find($id);
 
-		return view('sales.pcwork_edit')->with('pcwork',$edit_data);
+		return view('commission.pcwork_edit')->with('pcwork',$edit_data);
 	}
 
 	/**
@@ -196,7 +197,7 @@ class PcworkController extends Controller {
 				'refresh'		=> true
 			);
 	
-			return view('sales.pcwork_table')->with($data_pc);
+			return view('commission.pcwork_table')->with($data_pc);
 			
 
 		}
@@ -215,7 +216,7 @@ class PcworkController extends Controller {
 			if( Request::ajax() ) 
 			{
 
-				return view('sales.pcwork_edit')->withErrors($validator)->with('pcwork' ,$edit_data);
+				return view('commission.pcwork_edit')->withErrors($validator)->with('pcwork' ,$edit_data);
 			}
 
 			return 0;
@@ -235,8 +236,56 @@ class PcworkController extends Controller {
 
 	public function pctime()
 	{
-		return view('sales.pctime');
+		return view('commission.pctime');
 	}
+
+	public function printtime($emp_code)
+	{
+		return view('commission.pcwork_printtime')->with('emp_code',$emp_code);
+	}
+
+	public function printreport()
+	{
+		$message = [
+			'required'	=> 'กรุณาใส่ข้อมูล',
+			'numeric'	=> 'ต้องเป็นตัวเลขเท่านั้น',
+			'max'		=> 'ข้อมูลเกิน :max ตัวอักษร',
+			'unique_with'	=> 'มีการ Gen ข้อมูลไปแล้ว'
+
+		];
+
+
+		$rules = array(
+			'year'		=> 'required|max:4',
+			'month'	     	=> 'required|max:2',
+				
+			
+		);
+
+		$validator = Validator::make(Request::all(), $rules,$message);
+
+		if ($validator->passes())
+		{
+
+			$content ='
+		<p><h2>Purchase Order</h2></p>';
+
+		$mpdf = new mPDF('th', 'A4', '0', 'Tahoma'); 
+		$mpdf->WriteHTML($content);
+		$mpdf->Output();
+		
+		}else{
+			if( Request::ajax() ) 
+			{
+				
+				return view('commission.pcwork_printtime')->withErrors($validator)->withInput(Request::all())->with('emp_code',Request::get('emp_code'));				
+			}
+
+			return 0;
+		}
+
+	}
+
 
 	public function workIn()
 	{

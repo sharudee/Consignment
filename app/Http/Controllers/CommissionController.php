@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Request;
 use Validator;
+use Auth;
 
 // Model
 use App\Http\Model\Commission;
@@ -24,7 +25,7 @@ class CommissionController extends Controller {
 		$data_com = Commission::orderBy('class','asc')->get();
 
 		
-		return view('sales.commission')->with('commission',$data_com);
+		return view('masterdata.commission')->with('commission',$data_com);
 
 	}
 
@@ -35,7 +36,7 @@ class CommissionController extends Controller {
 	 */
 	public function create()
 	{
-		return view('sales.commission_create');
+		return view('masterdata.commission_create');
 	}
 
 	/**
@@ -96,13 +97,13 @@ class CommissionController extends Controller {
 				'refresh'		=> true
 			);
 	
-			return view('sales.commission_table')->with($data_com);
+			return view('masterdata.commission_table')->with($data_com);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.commission_create')->withErrors($validator)->withInput(Request::all());				
+				return view('masterdata.commission_create')->withErrors($validator)->withInput(Request::all());				
 			}
 
 			return 0;
@@ -131,7 +132,7 @@ class CommissionController extends Controller {
 	{
 		$edit_data = Commission::find($id);
 
-		return view('sales.commission_edit')->with('commission',$edit_data);
+		return view('masterdata.commission_edit')->with('commission',$edit_data);
 	}
 
 	/**
@@ -190,7 +191,7 @@ class CommissionController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.commission_table')->with($commission);
+			return view('masterdata.commission_table')->with($commission);
 
 		}
 		else{
@@ -208,7 +209,7 @@ class CommissionController extends Controller {
 			if( Request::ajax() ) 
 			{
 
-				return view('sales.commission_edit')->withErrors($validator)->with('commission' ,$edit_data);
+				return view('masterdata.commission_edit')->withErrors($validator)->with('commission' ,$edit_data);
 			}
 
 			return 0;
@@ -231,17 +232,9 @@ class CommissionController extends Controller {
 				'refresh'	=> true
 			);
 	
-		return view('sales.commission_table')->with($data_com);
+		return view('masterdata.commission_table')->with($data_com);
 	}
 
-	/*public function commissioncust()
-	{
-		//$cust_group = DB::table('customers')->groupBy('CustGroup')->get(['CustGroup']);
-		//dd($cust_group);
-		//return view('pages.addpoform')->with('cust_group',$cust_group);
-		$data_cust = Entity::orderBy('entity_code','asc')->get();
-		//dd($data_cust);
-		return view('sales.commissionclass_cust')->with('cust',$data_cust);
-	}*/
+
 
 }

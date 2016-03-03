@@ -26,7 +26,7 @@ class PcController extends Controller {
 		$data_pc = Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code','asc')->get();
 
 		
-		return view('sales.pc')->with('pc',$data_pc);
+		return view('commission.pc')->with('pc',$data_pc);
 	}
 
 	/**
@@ -36,7 +36,7 @@ class PcController extends Controller {
 	 */
 	public function create()
 	{
-		return view('sales.pc_create');
+		return view('commission.pc_create');
 	}
 
 	/**
@@ -99,13 +99,13 @@ class PcController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.pc_table')->with($data_pc);
+			return view('commission.pc_table')->with($data_pc);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.pc_create')->withErrors($validator)->withInput(Request::all());				
+				return view('commission.pc_create')->withErrors($validator)->withInput(Request::all());				
 			}
 
 			return 0;
@@ -133,7 +133,7 @@ class PcController extends Controller {
 	{
 		$edit_data = Pcmast::find($id);
 
-		return view('sales.pc_edit')->with('pc',$edit_data);
+		return view('commission.pc_edit')->with('pc',$edit_data);
 
 	}
 
@@ -192,7 +192,7 @@ class PcController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.pc_table')->with($pc);
+			return view('commission.pc_table')->with($pc);
 
 		}
 		else{
@@ -210,7 +210,7 @@ class PcController extends Controller {
 			if( Request::ajax() ) 
 			{
 
-				return view('sales.pc_edit')->withErrors($validator)->with('pc' ,$edit_data);
+				return view('commission.pc_edit')->withErrors($validator)->with('pc' ,$edit_data);
 			}
 
 			return 0;
@@ -232,7 +232,7 @@ class PcController extends Controller {
 				'refresh'	=> true
 			);
 	
-		return view('sales.pc_table')->with($data_pc);
+		return view('commission.pc_table')->with($data_pc);
 		
 		
 	}

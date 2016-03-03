@@ -21,7 +21,10 @@ Route::get('salesreport/{id}','SaleController@salesreport');
 Route::get('salesfile/{id}','SaleController@salesfile');
 Route::post('salesupload/{id}','SaleController@salesupload');
 Route::get('salesshowfile/{id}','SaleController@salesshowfile');
-//Route::get('uploadfile/{file_name}','SaleController@uploadfile');
+
+Route::get('data_cos2ho','TransferController@cos2ho');
+Route::get('data_ho2cos','TransferController@ho2cos');
+Route::get('cos2ho_process','TransferController@cos2ho_process');
 
 
 Route::get('salespremiumform/{pmt_no}','SaleController@premiumform');
@@ -34,6 +37,8 @@ Route::get('pcwork/{emp_code}', ['as' => 'pcwork.index', 'uses' => 'PcworkContro
 Route::get('pcwork/{emp_code}/create', ['as' => 'pcwork.create', 'uses' => 'PcworkController@create']);
 
 Route::get('pctime', 'PcworkController@pctime');
+Route::get('printtime/{emp_code}', 'PcworkController@printtime');
+Route::get('printreport', 'PcworkController@printreport');
 Route::post('workIn', 'PcworkController@workIn');
 Route::post('workOut', 'PcworkController@workOut');
 

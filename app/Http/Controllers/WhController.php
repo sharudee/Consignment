@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Request;
 use Validator;
+use Auth;
 //use Input;
 
 // Model
@@ -24,7 +25,7 @@ class WhController extends Controller {
 		$data_wh = Whmast::orderBy('wh_code','asc')->get();
 
 		
-		return view('sales.whmast')->with('whmast',$data_wh);
+		return view('masterdata.whmast')->with('whmast',$data_wh);
 	}
 
 	/**
@@ -34,7 +35,7 @@ class WhController extends Controller {
 	 */
 	public function create()
 	{
-		return view('sales.whmast_create');
+		return view('masterdata.whmast_create');
 	}
 
 	/**
@@ -99,13 +100,13 @@ class WhController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.whmast_table')->with($data_wh);
+			return view('masterdata.whmast_table')->with($data_wh);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.whmast_create')->withErrors($validator)->withInput(Request::all());				
+				return view('masterdata.whmast_create')->withErrors($validator)->withInput(Request::all());				
 			}
 
 			return 0;
@@ -122,7 +123,7 @@ class WhController extends Controller {
 	{
 		$whmast = Whmast::find($id);
 
-		return view('sales.whmast_show')->with('whmast',$whmast); 
+		return view('masterdata.whmast_show')->with('whmast',$whmast); 
 	}
 
 	/**
@@ -136,7 +137,7 @@ class WhController extends Controller {
 		$edit_data = Whmast::find($id);
 
 	
-		return view('sales.whmast_edit')->with('whmast',$edit_data);
+		return view('masterdata.whmast_edit')->with('whmast',$edit_data);
 	}
 
 	/**
@@ -202,7 +203,7 @@ class WhController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.whmast_table')->with($whmast);
+			return view('masterdata.whmast_table')->with($whmast);
 
 		}
 		else{
@@ -224,7 +225,7 @@ class WhController extends Controller {
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.whmast_edit')->withErrors($validator)->with('whmast',$edit_data);
+				return view('masterdata.whmast_edit')->withErrors($validator)->with('whmast',$edit_data);
 			}
 
 			return 0;
@@ -247,7 +248,7 @@ class WhController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.whmast_table')->with($data_wh);
+			return view('masterdata.whmast_table')->with($data_wh);
 	}
 
 }

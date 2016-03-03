@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Request;
 use Validator;
+use Auth;
 //use Input;
 
 // Model
@@ -24,7 +25,7 @@ class DocController extends Controller {
 		$data_doc = Docmast::orderBy('doc_code','asc')->get();
 
 		
-		return view('sales.docmast')->with('docmast',$data_doc);
+		return view('masterdata.docmast')->with('docmast',$data_doc);
 
 	}
 
@@ -35,7 +36,7 @@ class DocController extends Controller {
 	 */
 	public function create()
 	{
-		return view('sales.docmast_create');
+		return view('masterdata.docmast_create');
 	}
 
 	/**
@@ -106,13 +107,13 @@ class DocController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.docmast_table')->with($data_doc);
+			return view('masterdata.docmast_table')->with($data_doc);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.docmast_create')->withErrors($validator)->withInput(Request::all());				
+				return view('masterdata.docmast_create')->withErrors($validator)->withInput(Request::all());				
 			}
 
 			return 0;
@@ -142,7 +143,7 @@ class DocController extends Controller {
 	{
 		$edit_data = Docmast::find($id);
 
-		return view('sales.docmast_edit')->with('docmast',$edit_data);
+		return view('masterdata.docmast_edit')->with('docmast',$edit_data);
 	}
 
 	/**
@@ -202,7 +203,7 @@ class DocController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.docmast_table')->with($docmast);
+			return view('masterdata.docmast_table')->with($docmast);
 
 		}
 		else{
@@ -221,7 +222,7 @@ class DocController extends Controller {
 			if( Request::ajax() ) 
 			{
 
-				return view('sales.docmast_edit')->withErrors($validator)->with('docmast' ,$edit_data);
+				return view('masterdata.docmast_edit')->withErrors($validator)->with('docmast' ,$edit_data);
 			}
 
 			return 0;
@@ -243,7 +244,7 @@ class DocController extends Controller {
 				'refresh'	=> true
 			);
 	
-		return view('sales.docmast_table')->with($data_doc);
+		return view('masterdata.docmast_table')->with($data_doc);
 	}
 
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 //use Illuminate\Http\Request;
 use Request;
 use Validator;
+use Auth;
 //use Carbon\Carbon;
 
 // Model
@@ -24,7 +25,7 @@ class IncentiveController extends Controller {
 		$data_incentive = Incentive::orderBy('pdmodel_code','asc')->get();
 
 		
-		return view('sales.incentive')->with('incentive',$data_incentive);
+		return view('masterdata.incentive')->with('incentive',$data_incentive);
 	}
 
 	/**
@@ -34,7 +35,7 @@ class IncentiveController extends Controller {
 	 */
 	public function create()
 	{
-		return view('sales.incentive_create');
+		return view('masterdata.incentive_create');
 	}
 
 	/**
@@ -94,12 +95,12 @@ class IncentiveController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.incentive_table')->with($data_incentive);
+			return view('masterdata.incentive_table')->with($data_incentive);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
-				return view('sales.incentive_create')->withErrors($validator)->withInput(Request::all());			
+				return view('masterdata.incentive_create')->withErrors($validator)->withInput(Request::all());			
 			}
 
 			return 0;
@@ -129,7 +130,7 @@ class IncentiveController extends Controller {
 
 		
 
-		return view('sales.incentive_edit')->with('incentive',$edit_data);
+		return view('masterdata.incentive_edit')->with('incentive',$edit_data);
 	}
 
 	/**
@@ -204,7 +205,7 @@ class IncentiveController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.incentive_table')->with($incentive);
+			return view('masterdata.incentive_table')->with($incentive);
 		}
 		else{
 			
@@ -219,7 +220,7 @@ class IncentiveController extends Controller {
 			if( Request::ajax() ) 
 			{
 				
-				return view('sales.incentive_edit')->withErrors($validator)->with('incentive', $edit_data);
+				return view('masterdata.incentive_edit')->withErrors($validator)->with('incentive', $edit_data);
 			}
 
 			return 0;
@@ -241,7 +242,7 @@ class IncentiveController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.incentive_table')->with($data_incentive);
+			return view('masterdata.incentive_table')->with($data_incentive);
 	}
 
 	public function incentivemodel()
@@ -251,7 +252,7 @@ class IncentiveController extends Controller {
 		//return view('pages.addpoform')->with('cust_group',$cust_group);
 		$data_model = PmtProductModel::distinct()->select('pdmodel_code','pdmodel_desc')->orderBy('pdmodel_code','asc')->get();
 		//dd($data_cust);
-		return view('sales.incentive_model')->with('model',$data_model);
+		return view('masterdata.incentive_model')->with('model',$data_model);
 	}
 
 }

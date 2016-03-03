@@ -165,7 +165,7 @@ class SaleController extends Controller {
 
 	public function salespromotionform($pdate)
 	{
-		$sql = "select * from pmt_mast , pmt_consignee where pmt_mast.pmt_mast_id = pmt_consignee.pmt_mast_id and pmt_mast.start_date <='" . $pdate . "' and pmt_mast.end_date >='" . $pdate . "' and pmt_consignee.entity_code='" . Auth::user()->current_cust_code_logon ."'";
+		$sql = "select * from pmt_mast , pmt_consignee where pmt_mast.pmt_mast_id = pmt_consignee.pmt_mast_id and pmt_mast.start_date <='" . $pdate . "' and pmt_mast.end_date >='" . $pdate . "'  and pmt_mast.rec_status='ACTIVE' and pmt_consignee.entity_code='" . Auth::user()->current_cust_code_logon ."'";
 		
 		$data_pmt = DB:: select($sql);
 		//dd($data_pmt);
@@ -194,7 +194,7 @@ class SaleController extends Controller {
 
 	public function salespayform()
 	{
-		$data_pay = PmtTransMastModel::where('pmt_group_code','PAYMENT')->orderBy('transaction_code','asc')->get();
+		$data_pay = PmtTransMastModel::where('pmt_group_code','PAYMENT')->where('rec_status','ACTIVE')->orderBy('transaction_code','asc')->get();
 		return view('sales.salespayform')->with('pay',$data_pay);
 	}
 
@@ -774,7 +774,7 @@ class SaleController extends Controller {
 			$i++;
 			} 
 		$content = $content . '</table>';
-
+		$content = $content . '<br><br>หมายเหตุ : ' . $data_mast->remark1;
 
 		$mpdf = new mPDF('th', 'A4', '0', 'Tahoma'); 
 		$mpdf->WriteHTML($content);

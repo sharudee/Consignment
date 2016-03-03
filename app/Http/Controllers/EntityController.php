@@ -28,7 +28,7 @@ class EntityController extends Controller {
 		$data_entity = Entity::orderBy('entity_code','asc')->get();
 
 		
-		return view('sales.entity')->with('entity',$data_entity);
+		return view('masterdata.entity')->with('entity',$data_entity);
 							
 	}
 
@@ -41,7 +41,7 @@ class EntityController extends Controller {
 	{
 		$data_grp = Custgrp::orderBy('custgrp_code','asc')->get();
 
-		return view('sales.entity_create')->with('custgrp',$data_grp);
+		return view('masterdata.entity_create')->with('custgrp',$data_grp);
 	}
 
 	/**
@@ -123,13 +123,13 @@ class EntityController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.entity_table')->with($data_entity);
+			return view('masterdata.entity_table')->with($data_entity);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				$data_grp = Custgrp::orderBy('custgrp_code','asc')->get();
-				return view('sales.entity_create')->withErrors($validator)->withInput(Request::all())->with('custgrp',$data_grp);			
+				return view('masterdata.entity_create')->withErrors($validator)->withInput(Request::all())->with('custgrp',$data_grp);			
 			}
 
 			return 0;
@@ -147,7 +147,7 @@ class EntityController extends Controller {
 	{
 		$entity = Entity::find($id);
 
-		return view('sales.entity_show')->with('entity',$entity); 
+		return view('masterdata.entity_show')->with('entity',$entity); 
 	}
 
 	/**
@@ -162,7 +162,7 @@ class EntityController extends Controller {
 
 		$data_grp = Custgrp::orderBy('custgrp_code','asc')->get();
 
-		return view('sales.entity_edit')->with([
+		return view('masterdata.entity_edit')->with([
 							'custgrp' 	=> $data_grp ,
 							'entity' 		=> $edit_data
 							]);
@@ -256,7 +256,7 @@ class EntityController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.entity_table')->with($entity);
+			return view('masterdata.entity_table')->with($entity);
 			/*return view('sales.entity_edit')->with([
 							'custgrp' 	=> $data_grp ,
 							'entity' 		=> $entity
@@ -297,7 +297,7 @@ class EntityController extends Controller {
 							]) ->withErrors($validator)->withInput(Request::all());				
 				*/
 				//return view('sales.entity_edit')->withErrors($validator)->withInput(Request::all());
-				return view('sales.entity_edit')->withErrors($validator)->with([
+				return view('masterdata.entity_edit')->withErrors($validator)->with([
 							'custgrp' 	=> $data_grp, 
 							'entity' 		=> $edit_data
 							]);
@@ -325,7 +325,7 @@ class EntityController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.entity_table')->with($data_entity);
+			return view('masterdata.entity_table')->with($data_entity);
 	}
 
 

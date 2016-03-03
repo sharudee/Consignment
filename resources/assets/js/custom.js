@@ -59,6 +59,7 @@ $( document ).on('click', '.solsoSave', function(e){
 						title: solsoSelector.attr('data-message-title'), 
 					 	message: solsoSelector.attr('data-message-success') 
 					});
+					window.location.reload();
 				}else {
 					$('.solsoShowForm').html(data);
 					$.growl.error({ 
@@ -116,7 +117,7 @@ $('#solsoDeleteModal').on('show.bs.modal', function (e) {
 		                	//console.log(data);
 			            	if ($(data).filter('table.solsoRefresh').length == 1) {
 							//alert("OK");
-				
+					
 					$('#solsoDeleteModal').modal('hide');
 					$('#ajaxTable').html(data);
 					$('#countClients').text( $('.solsoTable').attr('data-all') ); // นับจำนวน Record ในตารางใหม่
@@ -124,6 +125,7 @@ $('#solsoDeleteModal').on('show.bs.modal', function (e) {
 						title: solsoSelector.attr('data-message-title'), 
 					 	message: solsoSelector.attr('data-message-success') 
 					});
+
 		 		}else {
 					//$('.solsoShowForm').html(data);
 					$.growl.error({ 
@@ -267,3 +269,44 @@ $( document ).on('click', '.solsoEdit', function(e){
 
 
 
+$( document ).on('click', '.solsoPrint', function(e){
+	e.preventDefault();
+	var solsoSelector 	= $(this);
+	var solsoFormAction   = $('.solsoForm').attr('action');
+	var solsoFormMethod = $('.solsoForm').attr('method');
+	var solsoFormData	= $('.solsoForm').serialize();
+	//var name = $('.solsoForm').attr('name').val();
+	//alert(solsoFormData);
+
+	$.ajax({
+		url: solsoFormAction,
+		type: solsoFormMethod,
+		data: solsoFormData,
+		cache: 	false,
+		dataType: 'html',
+		success:function(data) {
+			if (data == 0) {
+				console.log('error');
+			}else{
+				if ($(data).filter('table.solsoRefresh').length == 1) {
+					//alert("OK");
+					$('#solsoCrudModal').modal('hide'); // ปิด modal
+					$('#ajaxTable').html(data);
+					//$('#countClients').text( $('.solsoTable').attr('data-all') ); // นับจำนวน Record ในตารางใหม่
+					/*$.growl.notice({ 
+						title: solsoSelector.attr('data-message-title'), 
+					 	message: solsoSelector.attr('data-message-success') 
+					});*/
+				}else {
+					$('.solsoShowForm').html(data);
+					/*$.growl.error({ 
+						title: solsoSelector.attr('data-message-title'), 
+					 	message: solsoSelector.attr('data-message-error') 
+					});*/
+				}
+
+				
+			}
+		}
+	});
+});

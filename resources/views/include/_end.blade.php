@@ -14,7 +14,7 @@
 <script type='text/javascript' src="<?php echo URL::to('resources/assets/vendor/growl/jquery.growl.js');?>"></script>  
 <!-- END GROWL-->
 
-
+<script src="<?php echo URL::to('resources/assets/js/custom_pc.js');?>"></script>
 <script type="text/javascript" src="<?php echo URL::to('resources/assets/js/sweetalert.min.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_sales.js');?>"></script>
 
@@ -22,7 +22,7 @@
 
 <script src="<?php echo URL::to('resources/assets/js/custom_commission.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_incentive.js');?>"></script>
-<script src="<?php echo URL::to('resources/assets/js/custom_pc.js');?>"></script>
+
 <script src="<?php echo URL::to('resources/assets/js/custom.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_customer.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_promotion.js');?>"></script> 

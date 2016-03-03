@@ -217,7 +217,7 @@
 					<td >จำนวนสินค้า</td>
 					<td>{{$data_mast->tot_qty}}</td>
 					<td>ราคารวมทั้งสิ้น</td>
-					<td>{{$data_mast->tot_amt}}</td>
+					<td>{{$data_mast->tot_netamt}}</td>
 					<td></td>
 					<td></td>
 			</tr>
@@ -235,6 +235,18 @@
 						
 							
 			
+		</div>
+
+	</div>
+	<div class="row form-group">
+		<div class="col-sm-2">
+			<label>หมายเหตุ</label>
+		</div>
+		<div class="col-sm-8">
+			
+				<input type="text" name="remark" id="remark" class="form-control input-sm" value="{{$data_mast->remark1}}">
+				
+				
 		</div>
 
 	</div>

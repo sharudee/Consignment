@@ -23,7 +23,7 @@ class ComclassController extends Controller {
 	public function index($class)
 	{
 		$data_class = Commissionclass::where('class',$class)->orderBy('cust_code','asc')->get();
-		return view('sales.commissionclass')->with(['commissionclass'=>$data_class,
+		return view('masterdata.commissionclass')->with(['commissionclass'=>$data_class,
 								'class' => $class]);
 	}
 
@@ -35,7 +35,7 @@ class ComclassController extends Controller {
 	public function create()
 	{
 		$data_class = Commission::orderBy('class','asc')->get();
-		return view('sales.commissionclass_create')->with('commission',$data_class);
+		return view('masterdata.commissionclass_create')->with('commission',$data_class);
 	}
 
 	/**
@@ -96,13 +96,13 @@ class ComclassController extends Controller {
 				'refresh'		=> true
 			);
 	
-			return view('sales.commission_table')->with($data_class);
+			return view('masterdata.commission_table')->with($data_class);
 			
 		}else{
 			if( Request::ajax() ) 
 			{
 				$data_class = Commission::orderBy('class','asc')->get();
-				return view('sales.commissionclass_create')->withErrors($validator)->withInput(Request::all())->with('commission',$data_class);				
+				return view('masterdata.commissionclass_create')->withErrors($validator)->withInput(Request::all())->with('commission',$data_class);				
 			}
 
 			return 0;
@@ -132,7 +132,7 @@ class ComclassController extends Controller {
 
 		$data_class = Commission::orderBy('class','asc')->get();
 
-		return view('sales.commissionclass_edit')->with(['commissionclass' =>$edit_data,
+		return view('masterdata.commissionclass_edit')->with(['commissionclass' =>$edit_data,
 									'commission' =>$data_class]);
 	}
 
@@ -193,7 +193,7 @@ class ComclassController extends Controller {
 				'refresh'	=> true
 			);
 	
-			return view('sales.commissionclass_table')->with($commissionclass);
+			return view('masterdata.commissionclass_table')->with($commissionclass);
 
 		}
 		else{
@@ -211,7 +211,7 @@ class ComclassController extends Controller {
 			if( Request::ajax() ) 
 			{
 
-				return view('sales.commission_edit')->withErrors($validator)->with('commissionclass' ,$edit_data);
+				return view('masterdata.commission_edit')->withErrors($validator)->with('commissionclass' ,$edit_data);
 			}
 
 			return 0;
@@ -233,7 +233,7 @@ class ComclassController extends Controller {
 				'refresh'	=> true
 			);
 	
-		return view('sales.commissionclass_table')->with($data_class);
+		return view('masterdata.commissionclass_table')->with($data_class);
 	}
 
 	
@@ -244,6 +244,6 @@ class ComclassController extends Controller {
 		//return view('pages.addpoform')->with('cust_group',$cust_group);
 		$data_cust = Entity::orderBy('entity_code','asc')->get();
 		//dd($data_cust);
-		return view('sales.commissionclass_cust')->with('cust',$data_cust);
+		return view('masterdata.commissionclass_cust')->with('cust',$data_cust);
 	}
 }
