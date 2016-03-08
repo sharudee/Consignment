@@ -21,14 +21,14 @@
                         <div class="panel-body">
                             <div class="container">
                                 <fieldset>
-                                    <form class="form-horizontal" role="form" method="GET" action="{{url('search-TrnsMast')}}">
+                                    <form class="form-horizontal" role="form" method="GET" action="{{url('search-pmtpackage')}}">
                                         <div   class="row">
                                             <div   class="form-group">
                                                 <div class="col-xs-12 col-sm-2 col-md-2">
                                                     <label class="control-label">เลขที่/ชื่อโปรโมชั่น</label>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-8 col-md-8">
-                                                    <input type="text"  class="form-control" name="cboShEntityBranch"  >
+                                                    <input type="text"  class="form-control" name="search"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -37,26 +37,17 @@
                                                 <div class="col-xs-12 col-sm-2 col-md-2">
                                                     <label class="control-label">วันที่เริ่ม</label>
                                                 </div>
+                                         
                                                 <div class="col-xs-12 col-sm-3 col-md-3">
-                                                            <div class='input-group date' id='pmtstartdate' >
-                                                                <input type='text' class="form-control" readonly />
-
-                                                                <span class="input-group-addon">
-
-                                                                    <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                                </span>
-                                                            </div>
+                                                    <input type="text"  name="searchpmtstartdate" id="searchpmtstartdate" class="form-control input-sm required" value="<?php echo date('d/m/Y'); ?>" readonly>
                                                 </div>
+
                                                 <div class="col-xs-12 col-sm-2 col-md-2">
                                                     <label class="control-label">ถึง วันที่</label>
                                                 </div>
+                                   
                                                 <div class="col-xs-12 col-sm-3 col-md-3">
-                                                            <div class='input-group date' id='pmtenddate'>
-                                                                <input type='text' class="form-control" readonly/>
-                                                                <span class="input-group-addon">
-                                                                   <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                               </span>
-                                                           </div>
+                                                    <input type="text"  name="searchpmtenddate" id="searchpmtenddate" class="form-control input-sm required" value="<?php echo date('d/m/Y'); ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,3 +95,7 @@
 
     
 @stop
+
+
+
+        

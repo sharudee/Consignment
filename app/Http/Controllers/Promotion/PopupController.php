@@ -50,6 +50,7 @@ class PopupController extends Controller {
 		$condition = "PAYMENT";
 		$data_obj_info = DB::table('pmt_transaction_mast')
 						->where('pmt_group_code', '=', "$condition")
+						->where ('rec_status', '=', "ACTIVE")
 						->orderBy('transaction_code','asc')
 						->get();
 		return view('popup.popup_transmst_modal')->with('data_obj_info',$data_obj_info);
@@ -59,6 +60,7 @@ class PopupController extends Controller {
 		$condition = "DISC%";
 		$data_obj_info = DB::table('pmt_transaction_mast')
 						->where('pmt_group_code', 'like', "$condition")
+						->where ('rec_status', '=', "ACTIVE")
 						->orderBy('transaction_code','asc')
 						->get();
 		return view('popup.popup_transmst_modal')->with('data_obj_info',$data_obj_info);

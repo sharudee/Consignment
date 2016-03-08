@@ -1,9 +1,13 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h4 class="modal-title">ชุดรายการ ของแถม(Premuim Package Set)</h4>
+		
 </div>
 <div class="modal-body">
 	<table class="table table-bordered">
+	<button type="button" id="submit_select_product_all" class="btn btn-primary">เลือกทั้งหมด</button>
+	<label>.</label>
+	<button type="button" id="submit_unselect_product_all" class="btn btn-warning">ไม่เลือก</button>
 		<tbody>
 			@foreach($data_obj_info as $cs)
 			<tr>
@@ -30,6 +34,5 @@
 </div>
 <div class="modal-footer">
 	<button type="button" id="submit_select_premuimset" class="btn btn-primary">เลือก</button>
-	<button type="button" id="submit_select_product_all" class="btn btn-primary">เลือกทั้งหมด</button>
 	<button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 </div>

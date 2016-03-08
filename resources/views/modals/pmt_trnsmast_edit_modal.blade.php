@@ -1,4 +1,3 @@
-{!! Form::open(array('url' => 'submiteditpmttrnsmastform/' . Request::segment(2) , 'role' => 'form', 'method' => 'POST', 'class' => 'solsoForm')) !!} 
 
 
 <div class="modal fade" id="solsoCrudModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -12,7 +11,7 @@
 				<div class="row solsoShowForm"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="save_edit" class="btn btn-primary"><i class="fa fa-save"></i>บันทึก</button>
+				<button type="submit" id="SaveEditPmtTransMastModel" class="btn btn-primary"><i class="fa fa-save"></i>บันทึก</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>ปิด</button>
 			</div>
 		</div>
@@ -27,8 +26,6 @@
         </div>
     </div>
 </div>
-
-{!! Form::close()!!}
 
 
 
@@ -52,6 +49,8 @@
 			$('input[name=txt_pmtgrp_name]').val(txt_pmtgrp_name);
 			$(".popup_mstgrpmodal2").modal('hide');
 		});
+
+		
 	});
-	</script>
+</script>
 @stop

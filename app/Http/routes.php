@@ -22,9 +22,6 @@ Route::get('salesfile/{id}','SaleController@salesfile');
 Route::post('salesupload/{id}','SaleController@salesupload');
 Route::get('salesshowfile/{id}','SaleController@salesshowfile');
 
-Route::get('data_cos2ho','TransferController@cos2ho');
-Route::get('data_ho2cos','TransferController@ho2cos');
-Route::get('cos2ho_process','TransferController@cos2ho_process');
 
 
 Route::get('salespremiumform/{pmt_no}','SaleController@premiumform');
@@ -37,8 +34,6 @@ Route::get('pcwork/{emp_code}', ['as' => 'pcwork.index', 'uses' => 'PcworkContro
 Route::get('pcwork/{emp_code}/create', ['as' => 'pcwork.create', 'uses' => 'PcworkController@create']);
 
 Route::get('pctime', 'PcworkController@pctime');
-Route::get('printtime/{emp_code}', 'PcworkController@printtime');
-Route::get('printreport', 'PcworkController@printreport');
 Route::post('workIn', 'PcworkController@workIn');
 Route::post('workOut', 'PcworkController@workOut');
 
@@ -46,6 +41,15 @@ Route::get('commissionclass/{class}', ['as' => 'comclass.index', 'uses' => 'Comc
 
 Route::get('customer','CustomerController@index');
 Route::post('submitcustomer','CustomerController@submitcustomer');
+Route::get('customerlist','CustomerController@customerlist');
+Route::get('customershow/{id}','CustomerController@customershow');
+Route::get('customeredit/{id}','CustomerController@customeredit');
+Route::post('editcustomer','CustomerController@editcustomer');
+
+
+Route::get('data_cos2ho','TransferController@cos2ho');
+Route::get('data_ho2cos','TransferController@ho2cos');
+Route::get('cos2ho_process','TransferController@cos2ho_process');
 
 Route::get('custorder','CustorderController@index');
 Route::get('remand','RemandController@index');
@@ -167,7 +171,7 @@ Route::get('get_product_mst','Promotion\PmtProductSetController@get_product_mst'
 //Route::get('promotionproduct','Promotion\PromotionController@promotionproduct'); 
 //Route::get('promotionproductform','Promotion\PromotionController@promotionproductform'); 
 
-
+Route::get('search-pmtpackage','Promotion\PmtPackageController@search');
 Route::get('pmtpackage','Promotion\PmtPackageController@pmtpackage');  //--Page แรก
 Route::get('pmtpackagecontact/{pmt_mast_id}','Promotion\PmtPackageController@pmtpackagecontact'); 
 Route::get('pmtpackagecontact/{pmt_mast_id}/{pmt_mast_id1}','Promotion\PmtPackageController@pdmodel_code'); 
@@ -181,12 +185,14 @@ Route::get('editpmtpackageform/{pmt_mast_id}/{package_mast_id}','Promotion\PmtPa
 
 Route::post('pmtpackagecontact/{pmt_mast_id}','Promotion\PmtPackageController@submitaddnewpackage');  //--------บันทึก New Package
 Route::post('pmtpackagecontact/{pmt_mast_id}/{package_mast_id}','Promotion\PmtPackageController@submiteditpackage'); 
+Route::put('pmtpackagecontact/{pmt_mast_id}/{package_mast_id}','Promotion\PmtPackageController@submitDeletePackage'); 
 
 Route::get('pmtdiscpremiumdeny','Promotion\PmtDiscPremiumDenyController@pmtdiscpremiumdeny'); 
 Route::get('search-pmtdiscpremiumdeny','Promotion\PmtDiscPremiumDenyController@search'); 
 Route::get('getpmtdiscpremiumdenyform/{pmt_id}','Promotion\PmtDiscPremiumDenyController@getpmtdiscpremiumdenytoform'); //-------โหลดข้อมูลลงใน Form Add and Edit 
 
 Route::post('submitaddeditdiscpremiumdeny','Promotion\PmtDiscPremiumDenyController@submit_addeditdiscpremiumdeny');  //---------บันทึก ่สวนลด
+
 
 
 
@@ -214,8 +220,73 @@ Route::get('addpmtdiscpayform','Promotion\PmtDiscPayController@addpmtdiscpayform
 
 
 
-//-----------Master Data -------------------------------------------------
 
+//---------------------Menu System --------------------------------------
+
+Route::get('GetRolemenudetail','Menu\MenuController@GetRolemenudetail'); 
+
+Route::get('search-system','Menu\SystemController@search_system'); 
+Route::get('getsystemlist','Menu\SystemController@getsystemlist'); //-----หน้า list Contact 
+Route::get('systemnewform','Menu\SystemController@systemnewform'); //-----New Form  
+Route::get('editsystemform/{Su_System_Id}','Menu\SystemController@geteditsystemform'); //-----หน้า list Contact 
+Route::get('deletesystemform/{Su_System_Id}','Menu\SystemController@getdeletesystemform'); //-----หน้า list Contact 
+
+Route::post('summitnewsystem','Menu\SystemController@summitnewsystem'); //-----New Form  
+Route::post('summiteditsystem','Menu\SystemController@summiteditsystem'); //-----Edit Form   summiteditsystem
+Route::put('summitdeletesystem','Menu\SystemController@summitdeletesystem');  
+
+
+Route::get('search-program','Menu\ProgramController@search_program'); 
+Route::get('getprogramlist','Menu\ProgramController@getprogramlist'); //-----หน้า list Contact 
+Route::get('programnewform','Menu\ProgramController@programnewform'); //-----New Form   
+Route::get('editprogramform/{Su_System_Id}','Menu\ProgramController@geteditprogramform'); //-----หน้า list Contact 
+Route::get('deleteprogramform/{Su_System_Id}','Menu\ProgramController@getdeleteprogramform'); //-----หน้า list Contact 
+
+Route::post('summitnewprogram','Menu\ProgramController@summitnewprogram'); //-----New Form  
+Route::post('summiteditprogram','Menu\ProgramController@summiteditprogram'); //-----Edit Form   summiteditsystem
+Route::put('summitdeleteprogram','Menu\ProgramController@summitdeleteprogram');  
+
+
+
+Route::get('search-role','Menu\RoleController@search_role'); 
+Route::get('getrolelist','Menu\RoleController@getrolelist'); //-----หน้า list Contact 
+Route::get('rolenewform','Menu\RoleController@rolenewform'); //-----New Form   
+Route::get('editroleform/{Su_Role_id}','Menu\RoleController@geteditroleform'); //-----หน้า list Contact 
+Route::get('deleteroleform/{Su_Role_id}','Menu\RoleController@getdeleteroleform'); //-----หน้า list Contact 
+
+Route::post('summitnewrole','Menu\RoleController@summitnewrole'); //-----New Form  
+Route::post('summiteditrole','Menu\RoleController@summiteditrole'); //-----Edit Form   summiteditsystem
+Route::put('summitdeleterole','Menu\RoleController@summitdeleterole');  
+
+
+
+
+Route::get('search-menu','Menu\MenuController@search_menu'); 
+Route::get('getmenulist','Menu\MenuController@getmenulist'); //-----หน้า list Contact 
+Route::get('menunewform','Menu\MenuController@menunewform'); //-----New Form   
+Route::get('editmenuform/{Su_Menu_Id}','Menu\MenuController@geteditmenuform'); //-----หน้า list Contact 
+Route::get('deletemenuform/{Su_Menu_Id}','Menu\MenuController@getdeletemenuform'); //-----หน้า list Contact 
+
+Route::post('summitnewmenu','Menu\MenuController@summitnewmenu'); //-----New Form  
+Route::post('summiteditmenu','Menu\MenuController@summiteditmenu'); //-----Edit Form   summiteditsystem
+Route::put('summitdeletemenu','Menu\MenuController@summitdeletemenu');  
+
+
+
+Route::get('search-user','Menu\UserController@search_user'); 
+Route::get('getuserlist','Menu\UserController@Getuserlist'); //-----หน้า list Contact 
+
+Route::get('search-rolemenu','Menu\RoleMenuController@search_rolemenu'); 
+Route::get('getrolemenu','Menu\RoleMenuController@getrolemenu'); //-----หน้า list Contact 
+
+Route::get('search-roleuser','Menu\RoleUserController@search_roleuser'); 
+Route::get('getroleuser','Menu\RoleUserController@getroleuser'); //-----หน้า list Contact 
+
+
+Route::get('search-entityuser','Menu\EntityUserController@search_entityuser'); 
+Route::get('getentityuser','Menu\EntityUserController@getentityuserlist'); //-----หน้า list Contact 
+
+//-------------------- END Menu System ----------------------------------
 
 
 

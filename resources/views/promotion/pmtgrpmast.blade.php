@@ -5,10 +5,6 @@
 
 @section('content')
 
-
-
-
-
     <div class="col-md-12">
         <h3><i class="fa fa-list"></i> บันทึกข้อมูล กลุ่มข้อมูล</h3>
         <div class="panel-group accordion-custom accordion-teal">

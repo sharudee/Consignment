@@ -7,6 +7,9 @@
 </div>
 <div class="modal-body">
 	<table class="table table-bordered">
+		<button type="button" id="submit_select_cus_all" class="btn btn-primary">เลือกทั้งหมด</button>
+		<label>.</label>
+		<button type="button" id="submit_unselect_cus_all" class="btn btn-warning">ไม่เลือก</button>
 		<tbody>
 			@foreach($data_obj_info as $cs)
 			<tr>
@@ -28,6 +31,5 @@
 </div>
 <div class="modal-footer">
 	<button type="button" id="submit_select_cus" class="btn btn-primary">เลือก</button>
-	<button type="button" id="submit_select_cus_all" class="btn btn-primary">เลือกทั้งหมด</button>
 	<button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 </div>

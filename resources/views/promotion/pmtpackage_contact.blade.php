@@ -25,8 +25,8 @@
                                                 <th class="col-sm-3">รุ่น</th>
                                                 <th class="col-sm-2">ขนาด</th>
                                                 <th class="col-sm-1">ราคา</th>
-                                                <th class="col-sm-1">ราคาของแถม</th>
-                                                <th class="col-sm-1">มูลค่าทั้งชด</th>
+                                                <th class="col-sm-1">มูลค่าของแถม</th>
+                                                <th class="col-sm-1">มูลค่าทั้งชุด</th>
                                                 <th class="col-sm-1">ราคาพิเศษ</th>
                                                 <th class="col-sm-1">ราคาลดพิเศษ</th>
                                                 <th class="col-sm-1"></th>
@@ -45,23 +45,17 @@
                                         <td class="col-sm-1">{{$v->special1_price_amt}}</td> 
                                         <td class="col-sm-1">{{$v->special2_price_amt}}</td> 
                                         <td class="col-xs-1 col-sm-1 col-md-1">
-
-                                         
                                             <button type="button" class="btn btn-primary btn-sm solsoShowModal"  
                                             data-toggle="modal" data-target="#solsoCrudModal"   rel="editpmtgrpmast" data-edittransactionid="{{$v->package_mast_id}}"
                                             data-href="{{URL::to('editpmtpackageform/'.$v->pmt_mast_id.'/'.$v->package_mast_id.'/' )}}" data-modal-title="แก้ไข แพคเกจ ::{{$v->pmt_no}} ::{{$v->pmt_name}}">
-                                            <i class="fa fa-pencil"></i>  Edit</button>
-
-
+                                            <i class="fa fa-pencil"></i>Edit</button>
                                         </td>
                                         <td class="col-xs-1 col-sm-1 col-md-1">
-                                            <form class="formDelete" method="POST"  action="" enctype="multipart/form-data">
-                                                <input id= "_token" type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                <input id= "deleteID" type="hidden" name="deleteID" value="{{$v->package_mast_id}}" />
-                                                <button type="submit" class="btn btn-danger btn-sm solsoConfirm"> <i class="fa fa-trash"></i> Del</button> 
-                                            </form>
+                                            <button type="button" class="btn btn-danger btn-sm solsoShowModal"  
+                                            data-toggle="modal" data-target="#solsoCrudModal"   rel="editpmtgrpmast" data-edittransactionid="{{$v->package_mast_id}}"
+                                            data-href="{{URL::to('deletepmtpackageform/'.$v->pmt_mast_id.'/'.$v->package_mast_id.'/' )}}" data-modal-title="ลบ แพคเกจ ::{{$v->pmt_no}} ::{{$v->pmt_name}}">
+                                            <i class="fa fa-trash"></i>Del</button>
                                         </td>
-
 
                                     </tr>
                                     @endforeach

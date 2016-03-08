@@ -133,6 +133,25 @@ $(function(){
 		$(".pddsgn_code_modal").modal('hide');
 	});
 
+// Select All Check box  
+	$('body').on('click','button#submit_select_product_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='product_popup[]']").each(function ()
+		{
+			$("input[name='product_popup[]']").prop("checked","checked")
+		});
+	});
+
+// Select All Un Check box  
+	$('body').on('click','button#submit_unselect_product_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='product_popup[]']").each(function ()
+		{
+			$("input[name='product_popup[]']").removeAttr("checked")
+		});
+	});
+
+
 
 	//--------Product --------------
 

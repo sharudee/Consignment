@@ -1,4 +1,4 @@
-@foreach($result_data_obj as $crt => $v)
+﻿@foreach($result_data_obj as $crt => $v)
 <div class="modal-body">
 	<form class="form-horizontal">
 	<input type="hidden"  id= "txtpmt_mast_id" type="hidden" name="txtpmt_mast_id" value="{{$v->pmt_mast_id}}"  />
@@ -6,7 +6,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">เลขที่โปรโมชั่น</label>
 			<div class="col-sm-10">
-				 <input type="text" class="form-control" name="txtPmtNo" id="txtPmtNo" value="{{$v->pmt_no}}" readonly>
+				 <input type="text" class="form-control" name="txtPmtNoID" id="txtPmtNoID" value="{{$v->pmt_no}}" readonly>
 			</div>
 		</div>
 
@@ -14,40 +14,51 @@
 			<label class="col-sm-2 control-label">ชื่อโปรโมชั่น</label>
 			<div class="col-sm-10">
 				
-				<input id="personName" class="form-control placeholder has-error" type="text" name="txtPmtName" id="txtPmtName" value="{{$v->pmt_name}}" required="required" 
-		      	 data-bind="value: txtPmtName" 
+				<input type="text"  class="form-control placeholder has-error" type="text" name="txtPmtNameID" id="txtPmtNameID" value="{{$v->pmt_name}}" required="required" 
+		      	 data-bind="value: txtPmtNameID" 
 		      	 title="กรุณาระบุ ชื่อโปรโมชั่น" >		
-		      	 <span data-bind="validationMessage: txtPmtName"></span>
+		      	 <span data-bind="validationMessage: txtPmtNameID"></span>
 			</div>
 		</div>
-
 		<div class="form-group">
 			<label class="col-sm-2 control-label">วันที่เริ่ม</label>
-			<div class="col-sm-10">
+			<div class="col-sm-6">
 				<div class="row">
-					<div class="col-md-6">
-                      <div class='input-group ' >
-                                                            <input type='text' class="form-control"   id='txtStartdateID' name='txtStartdateID' readonly value="{{($v->start_date)}}" />
+					<div class="col-md-5">
+                      <div class='form-group date' >
+                    
+                  		<div class="col-xs-12 col-sm-12 col-md-12">
+                        	<input type="text"  name="txteditStartdateID" id="txteditStartdateID" class="form-control input-sm required" value="{{Carbon::parse($v->start_date)->format('d/m/Y') }}" readonly >
+ 								
+						</div>
+					<script type="text/javascript">
 
-                                                            <span class="input-group-addon">
+								$(function(){
+								$("#txteditStartdateID").datepicker({
+								dateFormat: 'dd/mm/yy'
+								});
 
-                                                                <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                            </span>
-
+							});
+					</script>
                       </div>
 					</div>
-	
+					<div class="col-md-2">
+						<label class="control-label">ถึงวันที่</label>
+					</div>
+					<div class="col-md-5">
+                      <div class='form-group date' >
+                                                        
+                  		<div class="col-xs-12 col-sm-12 col-md-12">
+                        	<input type="text"  name="txteditenddateID" id="txteditenddateID" class="form-control input-sm required" value="{{Carbon::parse($v->end_date)->format('d/m/Y') }}" readonly>
 
-
-					<div class="col-md-6">
-                      <div class='input-group ' >
-                                                            <input type='text' class="form-control" id='txtenddateID'  name ='txtenddateID' readonly value="{{($v->end_date)}}" />
-
-                                                            <span class="input-group-addon">
-
-                                                                <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                            </span>
-
+						</div>
+					<script type="text/javascript">
+								$(function(){
+								$("#txteditenddateID").datepicker({
+								dateFormat: 'dd/mm/yy'
+								});
+							});
+					</script>						
                       </div>
 					</div>
 				</div>
@@ -57,11 +68,11 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">เอกสารอ้างอิง</label>
 			<div class="col-sm-6">
-				 <input type="text" class="form-control" name="txtDocRef" id="txtDocRef" value="{{$v->ref_doc_no}}" >
+				 <input type="text" class="form-control" name="textDocRefID" id="textDocRefID" value="{{$v->ref_doc_no}}" >
 			</div>
 			<label class="col-sm-2 control-label">GP(%)</label>
 			<div class="col-sm-2">
-				<input type="text" name="txtGpAmt" id="txtGpAmt" class="form-control required" value="{{$v->gp_amt}}" >		
+				<input type="text" name="txtGpAmtID" id="txtGpAmtID" class="form-control required" value="{{$v->gp_amt}}" >		
 			</div>
 		</div>
 		<div class="form-group">

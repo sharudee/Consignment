@@ -1,9 +1,9 @@
 <table class="table solsoTable table-hover {{!empty($refresh) ? 'solsoRefresh' : '' }}" data-all="{{sizeof($pmttrnsmast_obj)}}">
 			<thead>
 				<tr>
-					<th class="col-xs-1 col-sm-3 col-md-3">รหัส</th>
-					<th class="col-xs-6 col-sm-4 col-md-4">ชื่อกลุ่ม</th>
-					<th class="col-xs-1 col-sm-3 col-md-3">รหัสกลุ่ม</th>
+					<th class="col-xs-3 col-sm-3 col-md-3">รหัส</th>
+					<th class="col-xs-4 col-sm-4 col-md-4">ชื่อกลุ่ม</th>
+					<th class="col-xs-3 col-sm-3 col-md-3">รหัสกลุ่ม</th>
 					<th class="col-xs-1 col-sm-1 col-md-1"></th>
 					<th class="col-xs-1 col-sm-1 col-md-1"></th>
 				</tr>
@@ -13,8 +13,8 @@
 		<tr>
 			
 			<td class="col-xs-3 col-sm-3 col-md-3">{{$v->transaction_code}}</td>
-			<td class="col-xs-7 col-sm-4 col-md-4">{{$v->trnsaction_name}}</td>		
-			<td class="col-xs-7 col-sm-3 col-md-3">{{$v->pmt_group_code}}</td>	
+			<td class="col-xs-4 col-sm-4 col-md-4">{{$v->trnsaction_name}}</td>		
+			<td class="col-xs-3 col-sm-3 col-md-3">{{$v->pmt_group_code}}</td>	
 
 			<td class="col-xs-1 col-sm-1 col-md-1">
 

@@ -9,7 +9,40 @@
 		</a>
 
 		  <ul class="nav" id="side-menu">
-                       
+      	                        <li>
+	                            <a href="#"><i class="fa fa-cogs"></i>ระบบ Admin</i><span class="fa arrow"></span></a>
+	                            <ul class="nav nav-second-level">
+	                                <li>
+	                                    <a href="{{URL::to('getsystemlist')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดหมวดระบบ</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getprogramlist')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดโปรแกรม</a>
+	                                </li>
+
+	                                <li>
+	                                    <a href="{{URL::to('getrolelist')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดสิทธิ์</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getmenulist')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดเมนู</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getuserlist')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i> บันทึกผู้ใช้งานระบบ</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getrolemenu')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดสิทธ์ การใช้เมนู</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getroleuser')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดสิทธ์ให้ ผู้ใช้</a>
+	                                </li>
+	                                <li>
+	                                    <a href="{{URL::to('getentityuser')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดการเข้า ห้าง-ร้าน</a>
+	                                </li>
+									<!-- <li>
+									    <a href="{{URL::to('getuserlist')}}">เปลี่ยน รหัสผ่าน</a>
+									</li> -->
+	                            </ul>
+	                            <!-- /.nav-second-level -->
+	                        </li>     
 	                        <li>
 	                            <a href="#"><i class="fa fa-bars"></i> Master Data<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
@@ -40,36 +73,36 @@
 	                                    <a href="{{URL::to('sales/promotion')}}">Promotion</a>
 	                                </li>-->
 	                                <li>
-	                                    <a href="{{URL::to('pmtgrpmast')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>กลุ่มข้อมูล</a>
+	                                    <a href="{{URL::to('pmtgrpmast')}}"> <i></i> <i></i> <i class="fa fa-caret-right"></i> กลุ่มข้อมูล</a>
 	                                </li>
 	                                <li>
-	                                    <a href="{{URL::to('pmttrnsmast')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ประเภทรายการ</a>
+	                                    <a href="{{URL::to('pmttrnsmast')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i> ประเภทรายการ</a>
 	                                </li>
 	                                <li>
-	                                    <a href="{{URL::to('pmtproductset')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>กำหนดชุดเช็ทสินค้า</a>
-	                                </li>
-
-	                                <li>
-	                                    <a href="{{URL::to('promotion')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>บันทึกโปรโมชั่น</a>
+	                                    <a href="{{URL::to('pmtproductset')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>กำหนดชุดเช็ทสินค้า</a>
 	                                </li>
 
 	                                <li>
-	                                    <a href="{{URL::to('pmtconsignnee')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>บันทึกห้างจัดรายการ</a>
+	                                    <a href="{{URL::to('promotion')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>บันทึกโปรโมชั่น</a>
 	                                </li>
 
 	                                <li>
-	                                    <a href="{{URL::to('pmtpackage')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>โปรโมชั่นแพคเกจ</a>
+	                                    <a href="{{URL::to('pmtconsignnee')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>บันทึกห้างจัดรายการ</a>
 	                                </li>
 
 	                                <li>
-	                                    <a href="{{URL::to('pmtdiscpremiumdeny')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ส่วนลด ไม่เอาของแถม</a>
+	                                    <a href="{{URL::to('pmtpackage')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>โปรโมชั่นแพคเกจ</a>
 	                                </li>
 
 	                                <li>
-	                                    <a href="{{URL::to('pmtdiscshop')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ส่วนลด ซื้อสินค้าครบ</a>
+	                                    <a href="{{URL::to('pmtdiscpremiumdeny')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>ส่วนลด ไม่เอาของแถม</a>
+	                                </li>
+
+	                                <li>
+	                                    <a href="{{URL::to('pmtdiscshop')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>ส่วนลด ซื้อสินค้าครบ</a>
 	                                </li>
 	                                <li>
-	                                    <a href="{{URL::to('pmtdiscpay')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ส่วนลด การชำระเงิน</a>
+	                                    <a href="{{URL::to('pmtdiscpay')}}"><i></i> <i></i> <i class="fa fa-caret-right"></i>ส่วนลด การชำระเงิน</a>
 	                                </li>
 	                            </ul>
 	                            <!-- /.nav-second-level -->
@@ -168,7 +201,7 @@
 	                            <a href="#"><i class="fa fa-cog"></i> System Management<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
 	                                <li>
-	                                    <a href="#"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ข้อมูลลูกค้า</a>
+	                                    <a href="{{URL::to('customerlist')}}"><i class="fa fa-exchanges"></i><i class="fa fa-exchanges"></i><i class="fa fa-caret-right"></i>ข้อมูลลูกค้า</a>
 	                                </li>
 
 

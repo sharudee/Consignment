@@ -46,14 +46,14 @@
  		</div>
 	</div>
 
-	<form action="cos2ho_process" method="get" role="form">
+	<form  role="form">
 	
 		<div class="form-group">
 			<div class="col-sm-10 col-sm-offset-5">
-				<button type="submit" class="btn btn-primary" id="Submitcos2ho"><i class="fa fa-sun-o"></i>ประมวลผล</button>
+				<button type="button" class="btn btn-primary" id="Submitcos2ho"><i class="fa fa-sun-o"></i>ประมวลผล</button>
 			</div>
 		</div>
 	</form>
-	@include('modals.modal-crud')
+	
 
 @stop

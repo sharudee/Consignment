@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Custmast extends Model {
 
-	protected $table='cos_invmast';
+	protected $table='cust_mast';
 	protected $fillable = [
 	 	'id' ,
 		'cust_code',

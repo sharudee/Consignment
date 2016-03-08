@@ -15,6 +15,7 @@ class CosInvmast extends Model {
 		 'pmt_no',
 		 'cust_code',
 		 'cust_name',
+		 'ship_to',
 		 'ship_titlename',
 		 'ship_custcode',
 		 'ship_custname',

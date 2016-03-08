@@ -16,8 +16,8 @@
 			<label class="col-sm-2 control-label">ชื่อโปรโมชั่น</label>
 			<div class="col-sm-10">
 
-	            <input type="text" name="txtPmtName" id="txtPmtNameID" required="required" class="form-control" data-message="กรุณาระบุ ชื่อโปรโมชั่น" >
-                <span class="k-invalid-message" data-message="txtPmtName"></span>			
+	            <input type="text" name="txtPmtNameID" id="txtPmtNameID" required="required" class="form-control" data-message="กรุณาระบุ ชื่อโปรโมชั่น" >
+                <span class="k-invalid-message" data-message="txtPmtNameID"></span>			
 			</div>
 		</div>
 
@@ -26,25 +26,26 @@
 			<label class="col-sm-2 control-label">วันที่เริ่ม</label>
 			<div class="col-sm-6">
 				<div class="row">
-					<div class="col-md-6">
-                      <div class='input-group date' >
-                                                            <input type='text' class="form-control"   id='txtStartdateID' name='txtStartdateID' readonly />
+					<div class="col-md-5">
+                      <div class='form-group' >
+                    
+                  		<div class="col-xs-12 col-sm-12 col-md-12">
+                        	<input type="text"  name="txtStartdateID" id="txtStartdateID" class="form-control input-sm required" value="<?php echo date('d/m/Y'); ?>" readonly>
 
-                                                            <span class="input-group-addon">
-
-                                                                <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                            </span>
+						</div>
 
                       </div>
 					</div>
-					<div class="col-md-6">
-                      <div class='input-group date' >
-                                                            <input type='text' class="form-control" id='txtenddateID'  name ='txtenddateID' readonly />
+					<div class="col-md-2">
+						<label class="control-label">ถึงวันที่</label>
+					</div>
+					<div class="col-md-5">
+                      <div class='form-group date' >
+                                                        
+                  		<div class="col-xs-12 col-sm-12 col-md-12">
+                        	<input type="text"  name="txtenddateID" id="txtenddateID" class="form-control input-sm required" value="<?php echo date('d/m/Y'); ?>"  readonly>
 
-                                                            <span class="input-group-addon">
-
-                                                                <span class="glyphicon glyphicon-calendar" style="font-size:35px;color:blue"></span>
-                                                            </span>
+						</div>
 
                       </div>
 					</div>

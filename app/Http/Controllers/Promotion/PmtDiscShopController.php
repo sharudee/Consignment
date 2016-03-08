@@ -33,7 +33,7 @@ class PmtDiscShopController extends Controller {
 
 	public function pmtdiscshop()
 	{
-		$data_promotion = PmtMastModel::orderBy('pmt_no','asc')->get();
+		$data_promotion = PmtMastModel::where ('rec_status', '=', "ACTIVE")->orderBy('pmt_no','asc')->get();
 		return view('promotion.pmtdiscshop')->with('promotion_obj',$data_promotion);
 	}
 
@@ -65,6 +65,7 @@ class PmtDiscShopController extends Controller {
         $data_obj_info = DB::table('pmt_product_set')
 			            ->select('pmt_product_set.*')
 			            ->where('pmt_group_code', '=', "$data_cond1")
+			            ->where('rec_status','=',"ACTIVE")
 			            ->orderby('product_set_code','asc')
 			            ->get();
 

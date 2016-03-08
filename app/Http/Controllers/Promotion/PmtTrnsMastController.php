@@ -18,7 +18,7 @@ class PmtTrnsMastController extends Controller {
 	public function pmttrnsmast()
 	{
 		$data_obj = PmtTransMastModel::orderBy('transaction_code','pmt_group_code','asc')->paginate(100);
-		return view('promotion.pmttrnsmast')->with('pmttrnsmast_obj',$data_obj);
+		return view('promotion.pmttrns_mast') ->with('pmttrnsmast_obj',$data_obj);
 	}
 
 	public function addpmttrnsmastform()
@@ -29,7 +29,7 @@ class PmtTrnsMastController extends Controller {
 
 	public function popup_mstgrp_modal_form()
 	{
-		$data_obj = PmtGroupMastModel::orderBy('pmt_group_code','asc')->get();
+		$data_obj = PmtGroupMastModel::orderBy('pmt_group_code','asc')->where ('rec_status', '=', "ACTIVE")->get();
 		return  view('promotion.popup_mstgrp_modal')->with('pmtgrpmast_obj',$data_obj);
 	}
 
@@ -48,7 +48,7 @@ class PmtTrnsMastController extends Controller {
             $dictionaries = PmtTransMastModel::orderBy('transaction_code', 'desc')->paginate(10);
         }
 
-        return view('promotion.pmttrnsmast')->with('pmttrnsmast_obj',$dictionaries);
+        return view('promotion.pmttrns_mast')->with('pmttrnsmast_obj',$dictionaries);
     }
 
 
@@ -72,9 +72,9 @@ class PmtTrnsMastController extends Controller {
 		$result = PmtTransMastModel::where('transaction_ID','=',$id);
 		$result->delete();
 
-		if($result){
+	
 			return redirect('pmttrnsmast');
-		}
+
 	}
 
 
@@ -82,20 +82,28 @@ class PmtTrnsMastController extends Controller {
 	{
 
 
-		$transaction_id  =  Request::input('txtedittransactionid'); 
+		$transaction_id  =  Request::input('transaction_id'); 
 
-		$data_edit = array(		
-				'trnsaction_name' => Trim(Request::get('txt_trnsaction_name')),
-				'pmt_group_code' =>Trim(Request::get('txt_pmt_group_code')), 
-				'rec_status' => trim(Request::get('txtRecStatus')),	
+			$data_edit = array(
+				'transaction_code'			=> Request::input('txttransactioncodeKey'),
+				'pmt_group_code'			=> Request::input('txtpmtgroupcodekey'),
+				'trnsaction_name'			=> Request::input('txttrnsactionnamekey'),
+				'rec_status'		=> Request::input('RecStatusKey'),
 		  		'updated_by' => 'admin',
-	  			'updated_at' => date('Y-m-d H:i:s')		
-			);
+	  			'updated_at' => date('Y-m-d H:i:s')	
+				);
 
-		$PmtGroupMastModel 	=PmtTransMastModel::find($transaction_id);
-		$PmtGroupMastModel->update($data_edit);
+			DB::table('pmt_transaction_mast')
+            ->where('transaction_id', $transaction_id)
+            ->update($data_edit);
+
+ 
+
+			return "Insert_Success";
+	
+
 		//flash()->success('Success', 'แก้ไขข้อมูลเรียบร้อยแล้ว.');
-		return redirect('pmttrnsmast');
+		//return redirect('pmttrnsmast');
 
 
 	}

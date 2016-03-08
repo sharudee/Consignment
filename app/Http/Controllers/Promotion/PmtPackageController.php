@@ -13,10 +13,27 @@ use App\Http\Model\PmtConsigneeModel;
 
 class PmtPackageController extends Controller {
 
+    public function search()
+    {
+
+        $query = urldecode( Request::input('search'));
+
+        if ($query) {
+            $data_promotion = PmtMastModel::where('pmt_no', 'LIKE', "%$query%")
+                ->orWhere('pmt_name', 'LIKE', "%$query%")
+                ->orWhere('rec_status', 'LIKE', "%$query%")
+                ->paginate(10);
+        } else {
+            $data_promotion = PmtMastModel::orderBy('pmt_no', 'desc')->paginate(10);
+        }
+
+        return view('promotion.pmtpackage')->with('promotion_obj',$data_promotion);
+    }
+
 
 	public function pmtpackage() //----หน้าแรก
 	{
-		$data_promotion = PmtMastModel::orderBy('pmt_no','asc')->get();
+		$data_promotion = PmtMastModel::where ('rec_status', '=', "ACTIVE")->orderBy('pmt_no','asc')->get();
 		return view('promotion.pmtpackage')->with('promotion_obj',$data_promotion);
 	}
 
@@ -63,6 +80,7 @@ class PmtPackageController extends Controller {
         $data_obj_info = DB::table('pmt_product_set')
 			            ->select('pmt_product_set.*')
 			            ->where('pmt_group_code', '<>', "$data_cond1")
+			            ->where('rec_status', '=', "ACTIVE")
 			            ->orderby('product_set_code','asc')
 			            ->get();
 
@@ -118,7 +136,32 @@ class PmtPackageController extends Controller {
 															,'data_obj_package_det_info'=>$data_obj_package_det_info]); 
 	}
 
+	public function loadforeditpmtpackageformDelete($pmt_mast_id ,$package_mast_id )
+	{
 
+        $data_obj_info = DB::table('pmt_mast')
+			            ->select('pmt_mast.*')
+			            ->where('pmt_mast_id', '=', "$pmt_mast_id")
+			            ->get();
+
+		$data_obj_package_mast_info = DB::table('pmt_package_mast')
+						->join('pmt_product_set', 'pmt_package_mast.pmt_product_set_id', '=', 'pmt_product_set.pmt_product_set_id')
+			            ->select('pmt_package_mast.*','pmt_product_set.product_set_code','pmt_product_set.product_set_desc')
+			            ->where('package_mast_id', '=', "$package_mast_id")
+			            ->get();
+
+
+			            
+		$data_obj_package_det_info = DB::table('pmt_package_det')
+						->join('pmt_product_set', 'pmt_product_set.pmt_product_set_id', '=', 'pmt_package_det.pmt_product_set_id')
+						->select('pmt_package_det.*','pmt_product_set.product_set_code','pmt_product_set.product_set_desc')
+			            ->where('pmt_package_det.package_mast_id', '=', "$package_mast_id")
+			            ->get();
+
+		return view('promotion.pmtpackageform_delete')->with(['pmt_mast_id_obj_info'=>$data_obj_info
+															,'data_obj_package_mast_info'=>$data_obj_package_mast_info
+															,'data_obj_package_det_info'=>$data_obj_package_det_info]); 
+	}
 
 	
     public function submiteditpackage($pmt_mast_id ,$package_mast_id)
@@ -222,6 +265,31 @@ class PmtPackageController extends Controller {
 				return "Insert_Success";
 			}
 	}
+    public function submitDeletePackage($pmt_mast_id ,$package_mast_id)
+	{
+	
+		$getpmt_mast_id_key  = Request::input('pmt_mast_id_key'); 
+		$getpackage_mast_id =   Request::input('package_mast_id');  
+
+
+			if(!empty($getpackage_mast_id  ))
+			{
+
+			
+					DB::table('pmt_package_mast')
+		            	->where('package_mast_id', $getpackage_mast_id)
+		            	->delete();
+
+			    	DB::table('pmt_package_det')
+			    		->where('package_mast_id', $getpackage_mast_id)
+			    		->delete();
+
+
+
+				return "Insert_Success";
+			}
+	}
+
     public function submitaddnewpackage($id)
 	{
 

@@ -21,7 +21,7 @@
 					<button type="summit" class="btn btn-primary btn-sm solsoShowModal11"  
 					data-toggle="modal" data-target="#solsoCrudModal11" 
 					data-href="{{URL::to('pmtpackagecontact/'.$v->pmt_mast_id)}}" data-modal-title="ห้างจัดรายการ (เลขที่โปรโมชั่น::{{$v->pmt_no}})" >
-					<i class="fa fa-pencil"></i> ห้าง-ร้าน</button>
+					<i class="fa fa-pencil"></i> รายละเอียด</button>
 				</form>
 			</td>
 		</tr>

@@ -75,7 +75,25 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 
 
 
-	// Event submit  click_premuim_set
+// Select All Check box  
+	$('body').on('click','button#submit_select_product_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='product_premuim_setcode[]']").each(function ()
+		{
+			$("input[name='product_premuim_setcode[]']").prop("checked","checked")
+		});
+	});
+
+// Select All Un Check box  
+	$('body').on('click','button#submit_unselect_product_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='product_premuim_setcode[]']").each(function ()
+		{
+			$("input[name='product_premuim_setcode[]']").removeAttr("checked")
+		});
+	});
+
+
 
 	$('body').on('click','button#submit_select_premuimset',function(){
 		
@@ -225,7 +243,8 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 					swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
 					// ปิด modal
 					$(".consignnee_grp_modal").modal('hide');
-					window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
+					//window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
+					window.location.href ="";
 					//redi window.location.href = "pmtpackagecontact";
 				}
 			},
@@ -325,16 +344,122 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 				if(data=="Insert_Success")
 				{
 					// แสดง popup ด้วย sweet alert
-					swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+					swal("Record Save!", "บันทึก แก้ไขข้อมูลเรียบร้อย!", "success");
 					// ปิด modal
 					$(".consignnee_grp_modal").modal('hide');
-					window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
+					//window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
 					//redi window.location.href = "pmtpackagecontact";
+					window.location.href ="";
 				}
 			},
 
 		},"json");
 	});
+
+//------------------Summit Delete ------------------------------
+	$('body').on("click",'button#submit_delete_package',function(){
+		var package_mast_id = $("input#package_mast_id").val();
+		var pmt_mast_id = $("input#pmt_mast_id").val();
+		var pmt_product_set_h= $("input#pmt_product_set").val(); 
+
+		var pdmodel_code_h = $("input#pdmodel_code_package").val(); 
+		var pdsize_code_h = $("input#pdsize_code_package").val(); 
+
+		var pdmodel_desc_h = $("input#pdmodel_desc_h").val(); 
+		var pdsize_desc_h = $("input#pdsize_desc_h").val(); 
+
+		var package_unit_price_h = $("input#package_unit_price").val();  
+		var total_price_amt_h = $("input#total_price_amt").val(); 
+		var special1_price_amt_h = $("input#special1_price_amt").val(); 
+		var special2_price_amt_h = $("input#special2_price_amt").val();  
+
+		var pdmodel_desc_h = $("input#pdmodel_desc_h").val();  
+		var pdsize_desc_h = $("input#pdsize_desc_h").val();  
+
+		var _token = $("input[name=_token]").val();
+
+
+		//--------------------Detail -------------------------------
+		var product_set_code = [];
+		$("input[name='product_set_code[]']").each(function ()
+		{
+			product_set_code.push($(this).val());
+		});
+
+		var product_set_desc = [];
+		$("input[name='product_set_desc[]']").each(function ()
+		{
+			product_set_desc.push($(this).val());
+		});
+
+		var set_price_amt = [];
+		$("input[name='set_price_amt[]']").each(function ()
+		{
+			set_price_amt.push($(this).val());
+		});
+
+		var uom = [];
+		$("input[name='uom[]']").each(function ()
+		{
+			uom.push($(this).val());
+		});
+
+		var set_qty = [];
+		$("input[name='set_qty[]']").each(function ()
+		{
+			set_qty.push($(this).val());
+		});
+
+		$.ajax({
+
+			beforeSend:function() { 
+				// Loading...
+			},
+
+			complete:function() {
+				// Close Loading...
+			},
+
+			url: pmt_mast_id+"/"+package_mast_id  ,
+			type:'PUT',
+			cache:false,
+			data:{
+				_token:_token,
+				pmt_mast_id_key:pmt_mast_id,
+				package_mast_id:package_mast_id,
+				pmt_product_set_h:pmt_product_set_h,
+				pdmodel_code_h:pdmodel_code_h,
+				pdsize_code_h:pdsize_code_h,
+				pdmodel_desc_h:pdmodel_desc_h,
+				pdsize_desc_h:pdsize_desc_h,
+				package_unit_price_h:package_unit_price_h,
+				total_price_amt_h:total_price_amt_h,
+				special1_price_amt_h:special1_price_amt_h,
+				special2_price_amt_h:special2_price_amt_h,
+				product_set_code:product_set_code,
+				product_set_desc:product_set_desc,
+				set_price_amt:set_price_amt,
+				set_qty:set_qty,
+				uom:uom
+			},
+
+			success: function(data)
+			{
+				if(data=="Insert_Success")
+				{
+					// แสดง popup ด้วย sweet alert
+					swal("Record Save!", "ลบรายการ แพคเกจ เรียบร้อย!", "success");
+					// ปิด modal
+					$(".consignnee_grp_modal").modal('hide');
+					//window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
+					//redi window.location.href = "pmtpackagecontact";
+					window.location.href ="";
+				}
+			},
+
+		},"json");
+	});
+
 });
 
 

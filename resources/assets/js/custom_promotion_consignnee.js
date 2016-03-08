@@ -47,6 +47,24 @@ $(function(){
 
 	// Event submit  Customer
 
+// Select All Check box  
+	$('body').on('click','button#submit_select_cus_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='entity_code_popup[]']").each(function ()
+		{
+			$("input[name='entity_code_popup[]']").prop("checked","checked")
+		});
+	});
+
+// Select All Un Check box  
+	$('body').on('click','button#submit_unselect_cus_all',function(){
+		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
+		$("input[name='entity_code_popup[]']").each(function ()
+		{
+			$("input[name='entity_code_popup[]']").removeAttr("checked")
+		});
+	});
+
 
 
 

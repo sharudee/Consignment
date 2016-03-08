@@ -1067,10 +1067,18 @@ $(function(){
 					{
 						
 						// แสดง popup ด้วย sweet alert
-						swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+						//swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+						swal({ 
+						  title: "Record Save!",
+						   text: "บันทึกรายการเรียบร้อย!",
+						    type: "success" 
+						  },
+						  function(){
+						    window.location.reload();
+						});
 						// ปิด modal
 						$(".pomodal").modal('hide');
-						window.location.reload();
+						//window.location.reload();
 						
 					}
 
@@ -1247,10 +1255,18 @@ $(function(){
 				if(data=="Edit_Success")
 				{
 					// แสดง popup ด้วย sweet alert
-					swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+					//swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+					swal({ 
+						  title: "Record Save!",
+						   text: "บันทึกรายการเรียบร้อย!",
+						    type: "success" 
+						  },
+						  function(){
+						    window.location.reload();
+						});
 					// ปิด modal
 					$("#solsoCrudModal").modal('hide');
-					window.location.reload();
+					//window.location.reload();
 				}
 			},
 

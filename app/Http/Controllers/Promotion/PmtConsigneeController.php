@@ -34,7 +34,7 @@ public function get_cust_grp()
 }
 	public function pmtconsignnee()
 	{
-		$data_promotion = PmtMastModel::orderBy('pmt_no','asc')->get();
+		$data_promotion = PmtMastModel::where ('rec_status', '=', "ACTIVE")->orderBy('pmt_no','asc')->get();
 		return view('promotion.pmtconsignnee')->with('promotion_obj',$data_promotion);
 	}
 	public function addpmtconsignneeform()

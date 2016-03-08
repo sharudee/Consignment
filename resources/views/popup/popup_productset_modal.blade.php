@@ -30,6 +30,5 @@
 </div>
 <div class="modal-footer">
 	<button type="button" id="submit_select_productset" class="btn btn-primary">เลือก</button>
-	<button type="button" id="submit_select_product_all" class="btn btn-primary">เลือกทั้งหมด</button>
 	<button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 </div>

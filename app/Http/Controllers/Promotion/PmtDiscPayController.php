@@ -34,7 +34,7 @@ class PmtDiscPayController extends Controller {
 
 	public function pmtdiscpay()
 	{
-		$data_promotion = PmtMastModel::orderBy('pmt_no','asc')->get();
+		$data_promotion = PmtMastModel::where ('rec_status', '=', "ACTIVE")->orderBy('pmt_no','asc')->get();
 		return view('promotion.pmtdiscpay')->with('promotion_obj',$data_promotion);		
 	}
 

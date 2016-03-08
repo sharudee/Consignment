@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
 	// Event newpo Link
 	$("a[rel=clickpmttrnsmast]").click(function(){
 		$.get('addpmttrnsmastform',function(data){
@@ -28,6 +28,55 @@ $(function(){
 		$('input[name=txt_pmtgrp_name]').val(txt_pmtgrp_name);
 		$(".popup_mstgrpmodal").modal('hide');
 	});
+
+	$('body').on("click",'button#SaveEditPmtTransMastModel',function(){
+
+		var transaction_id  =  $("input#txtedittransactionid").val();  
+		var txt_transaction_code   	= $("input#txt_transaction_code").val();
+		var txt_trnsaction_name  	= $("input#txt_trnsaction_name").val();
+		var txt_pmt_group_code  	= $("input#txt_pmt_group_code").val();
+		//---Dropdown list
+		var RecStatus      = $("select#txtRecStatusID").val();  
+
+		var _token = $("input[name=_token]").val();
+
+		$.ajax({
+
+			beforeSend:function() { 
+				// Loading...
+			},
+
+			complete:function() {
+				// Close Loading...
+			},
+
+			url:'submiteditpmttrnsmastform',
+			type:'POST',
+			cache:false,
+			data:{
+				_token:_token,
+				transaction_id:transaction_id,
+				txttransactioncodeKey:txt_transaction_code,
+				txtpmtgroupcodekey:txt_pmt_group_code,
+				txttrnsactionnamekey:txt_trnsaction_name,
+				RecStatusKey:RecStatus
+			},
+
+			success: function(data)
+			{
+				if(data=="Insert_Success")
+				{
+					// แสดง popup ด้วย sweet alert
+					swal("Record Save!", "บันทึกรายการเรียบร้อย!", "success");
+					// ปิด modal
+					$(".PmtTransMastModel").modal('hide');
+					window.location.href = "pmttrnsmast";
+				}
+			},
+
+		},"json");
+	});
+
 
 
 

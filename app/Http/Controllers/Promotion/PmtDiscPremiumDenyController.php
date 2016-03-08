@@ -32,7 +32,7 @@ class PmtDiscPremiumDenyController extends Controller {
 	public function pmtdiscpremiumdeny()
 	{
 
-		$data_promotion = PmtMastModel::orderBy('pmt_no','asc')->get();
+		$data_promotion = PmtMastModel::where ('rec_status', '=', "ACTIVE")->orderBy('pmt_no','asc')->get();
 		return view('promotion.pmtdiscpremiumdeny')->with('promotion_obj',$data_promotion);
 	}
 

@@ -16,7 +16,6 @@ class PmtTrnsGrpMastController extends Controller {
 	public function pmtgrpmast()
 	{
 
-		
 
 		$data_obj = PmtGroupMastModel::orderBy('pmt_group_code','desc')->get();
 		return view('promotion.pmtgrpmast')->with('pmtgrpmast_obj',$data_obj);
