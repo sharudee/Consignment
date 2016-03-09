@@ -11,7 +11,7 @@ class PmtTransMastModel_ho extends Model {
 	'transaction_id' ,
 	  'transaction_code' ,
 	  'pmt_group_code' ,
-	  'transaction_name' ,
+	  'trnsaction_name' ,
 	  'rec_status' ,
 	  'tf_st',
 	  'tf_by',

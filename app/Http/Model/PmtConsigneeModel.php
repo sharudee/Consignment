@@ -5,12 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 class PmtConsigneeModel extends Model {
 
 	protected $table='pmt_consignee';
+	protected $primaryKey = 'consignee_id';
 	protected $fillable = [
 	  'consignee_id',
 	  'pmt_mast_id' ,
-	  'entity_id' ,
+	  'entity_code' ,
 	  'discount_amt' ,
-	  'rec_status' ,
 	  'tf_st',
 	  'tf_by',
 	  'tf_date',

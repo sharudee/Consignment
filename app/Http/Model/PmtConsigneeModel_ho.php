@@ -6,12 +6,12 @@ class PmtConsigneeModel_ho extends Model {
 
 	protected $connection = 'mysql2';
 	protected $table='pmt_consignee';
+	protected $primaryKey = 'consignee_id';
 	protected $fillable = [
 	  'consignee_id',
 	  'pmt_mast_id' ,
-	  'entity_id' ,
+	  'entity_code' ,
 	  'discount_amt' ,
-	  'rec_status' ,
 	  'tf_st',
 	  'tf_by',
 	  'tf_date',

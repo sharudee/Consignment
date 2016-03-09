@@ -54,6 +54,6 @@
 			</div>
 		</div>
 	</form>
-	
+	@include('modals.modal-crud')
 
 @stop

@@ -7,6 +7,7 @@ class PmtProductSetModel extends Model {
 	//pmt_product_set
 
 	protected $table='pmt_product_set';
+	protected $primaryKey = 'pmt_product_set_id';
 	protected $fillable = [
 	  'pmt_product_set_id' ,
 	  'product_set_code' ,

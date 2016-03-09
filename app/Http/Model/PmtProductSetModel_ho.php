@@ -6,6 +6,7 @@ class PmtProductSetModel_ho extends Model {
 
 	protected $connection = 'mysql2';
 	protected $table='pmt_product_set';
+	protected $primaryKey = 'pmt_product_set_id';
 	protected $fillable = [
 	  'pmt_product_set_id' ,
 	  'product_set_code' ,

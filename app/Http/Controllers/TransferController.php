@@ -36,6 +36,10 @@ use App\Http\Model\PmtProductSetModel;
 use App\Http\Model\PmtProductSetModel_ho;
 use App\Http\Model\PmtTransMastModel;
 use App\Http\Model\PmtTransMastModel_ho;
+use App\Http\Model\Product;
+use App\Http\Model\Product_ho;
+use App\Http\Model\PmtMastModel;
+use App\Http\Model\PmtMastModel_ho;
 
 
 
@@ -111,12 +115,11 @@ class TransferController extends Controller {
 		$cos = PmtConsigneeModel::where('tf_st','N')->get();
 		foreach ($cos as $data_cos) 
 		{
-			$consignee_id = $data_cos->consignee_id,
+			$consignee_id = $data_cos->consignee_id;
 			$data_consignee = array(
 				 'pmt_mast_id'	 	=> $data_cos->pmt_mast_id,
-				  'entity_id' 		=> $data_cos->entity_id,
+				  'entity_code' 		=> $data_cos->entity_code,
 				  'discount_amt' 	=> $data_cos->discount_amt,
-				  'rec_status' 		=> $data_cos->rec_status,
 				  'tf_st'			=> 'Y',	
 				  'tf_by'			=> Auth::user()->username,
 				  'tf_date'		=> date('Y-m-d'),
@@ -124,7 +127,7 @@ class TransferController extends Controller {
 				  'updated_at' 		=> $data_cos->updated_at,
 				  'created_by' 		=> $data_cos->created_by,
 				  'created_at'		=> $data_cos->created_at 
-			)
+			);
 
 
 			$insert_data = PmtConsigneeModel_ho::create($data_consignee);
@@ -147,7 +150,7 @@ class TransferController extends Controller {
 		$discpay = PmtDiscPayModel::where('tf_st','N')->get();
 		foreach ($discpay as $data_discpay) 
 		{
-			$disc_pay_rate_id = $data_discpay->disc_pay_rate_id,
+			$disc_pay_rate_id = $data_discpay->disc_pay_rate_id;
 			$data_discpayment = array(
 				 'pmt_mast_id'	 	=> $data_discpay->pmt_mast_id,
 				  'transaction_code' 	=> $data_discpay->transaction_code,
@@ -162,7 +165,7 @@ class TransferController extends Controller {
 				  'updated_at' 		=> $data_discpay->updated_at,
 				  'created_by' 		=> $data_discpay->created_by,
 				  'created_at'		=> $data_discpay->created_at 
-			)
+			);
 
 
 			$insert_data = PmtDiscPayModel_ho::create($data_discpayment);
@@ -185,7 +188,7 @@ class TransferController extends Controller {
 		$discpm = PmtDiscPMDenyModel::where('tf_st','N')->get();
 		foreach ($discpm as $data_discpm) 
 		{
-			$disc_premium_deny_id = $data_discpm->disc_premium_deny_id,
+			$disc_premium_deny_id = $data_discpm->disc_premium_deny_id;
 			$data_discpremium = array(
 				'pmt_mast_id' 		=> $data_discpm->pmt_mast_id,
 				'pdsize_code' 		=> $data_discpm->pdsize_code,
@@ -200,10 +203,10 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_discpm->updated_at,
 				'created_by' 		=> $data_discpm->created_by,
 				'created_at'		=> $data_discpm->created_at 
-			)
+			);
 
 
-			$insert_data = PmtDiscPayModel_ho::create($data_discpremium);
+			$insert_data = PmtDiscPMDenyModel_ho::create($data_discpremium);
 
 			
 			$data_discpm_upd = array(
@@ -214,7 +217,7 @@ class TransferController extends Controller {
 			);
 
 
-			$update_data =PmtDiscPayModel::find($disc_premium_deny_id);
+			$update_data =PmtDiscPMDenyModel::find($disc_premium_deny_id);
 			$update_data->update($data_discpm_upd);
 		}
 
@@ -223,7 +226,7 @@ class TransferController extends Controller {
 		$discsh = PmtDiscShopModel::where('tf_st','N')->get();
 		foreach ($discsh as $data_discsh) 
 		{
-			$disc_shop_rate_id = $data_discsh->disc_shop_rate_id,
+			$disc_shop_rate_id = $data_discsh->disc_shop_rate_id;
 			$data_discshop = array(
 				'pmt_mast_id' 		=> $data_discsh->pmt_mast_id,
 				'transaction_code' 	=> $data_discsh->transaction_code,
@@ -240,7 +243,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_discsh->updated_at,
 				'created_by' 		=> $data_discsh->created_by,
 				'created_at'		=> $data_discsh->created_at 
-			)
+			);
 
 
 			$insert_data = PmtDiscShopModel_ho::create($data_discshop);
@@ -260,10 +263,10 @@ class TransferController extends Controller {
 
 
 		// Table Pmt_Group
-		$grp = PmtGroupModel::where('tf_st','N')->get();
+		$grp = PmtGroupMastModel::where('tf_st','N')->get();
 		foreach ($grp as $data_grp) 
 		{
-			$pmt_group_id = $data_grp->pmt_group_id,
+			$pmt_group_id = $data_grp->pmt_group_code;
 			$data_group = array(
 				'pmt_group_code' 	=> $data_grp->pmt_group_code ,
 				'pmt_group_name'	=> $data_grp->pmt_group_name  ,
@@ -275,10 +278,10 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_grp->updated_at,
 				'created_by' 		=> $data_grp->created_by,
 				'created_at'		=> $data_grp->created_at 
-			)
+			);
 
 
-			$insert_data = PmtGroupModel_ho::create($data_group);
+			$insert_data = PmtGroupMastModel_ho::create($data_group);
 
 			
 			$data_group_upd = array(
@@ -289,7 +292,7 @@ class TransferController extends Controller {
 			);
 
 
-			$update_data =PmtGroupModel::find($pmt_group_id);
+			$update_data =PmtGroupMastModel::find($pmt_group_id);
 			$update_data->update($data_group_upd);
 		}	
 
@@ -298,7 +301,7 @@ class TransferController extends Controller {
 		$pm = PmtMastModel::where('tf_st','N')->get();
 		foreach ($pm as $data_pm) 
 		{
-			$pmt_mast_id = $data_pm->pmt_mast_id,
+			$pmt_mast_id = $data_pm->pmt_mast_id;
 			$data_pmmast = array(
 				'pmt_no' 		=> $data_pm->pmt_no,
 				'pmt_name' 		=> $data_pm->pmt_name,
@@ -316,7 +319,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_pm->updated_at,
 				'created_by' 		=> $data_pm->created_by,
 				'created_at'		=> $data_pm->created_at 
-			)
+			);
 
 
 			$insert_data = PmtMastModel_ho::create($data_pmmast);
@@ -339,7 +342,7 @@ class TransferController extends Controller {
 		$pkmast = PmtPackageMastModel::where('tf_st','N')->get();
 		foreach ($pkmast as $data_pkmast) 
 		{
-			$package_mast_id = $data_pkmast->package_mast_id,
+			$package_mast_id = $data_pkmast->package_mast_id;
 			$data_pmpkmast = array(
 				'pmt_mast_id' 		=> $data_pkmast->pmt_mast_id,
 				'pmt_product_set_id' 	=> $data_pkmast->pmt_product_set_id,
@@ -365,7 +368,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_pkmast->updated_at,
 				'created_by' 		=> $data_pkmast->created_by,
 				'created_at'		=> $data_pkmast->created_at 
-			)
+			);
 
 
 			$insert_data = PmtPackageMastModel_ho::create($data_pmpkmast);
@@ -388,7 +391,7 @@ class TransferController extends Controller {
 		$pkdet = PmtPackageDetModel::where('tf_st','N')->get();
 		foreach ($pkdet as $data_pkdet) 
 		{
-			$package_det_id = $data_pkdet->package_det_id,
+			$package_det_id = $data_pkdet->package_det_id;
 			$data_pmpkdet = array(
 				'package_mast_id' 	=> $data_pkdet->package_mast_id,
 				'pmt_product_set_id' 	=> $data_pkdet->pmt_product_set_id,
@@ -404,7 +407,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_pkdet->updated_at,
 				'created_by' 		=> $data_pkdet->created_by,
 				'created_at'		=> $data_pkdet->created_at 
-			)
+			);
 
 
 			$insert_data = PmtPackageDetModel_ho::create($data_pmpkdet);
@@ -429,7 +432,7 @@ class TransferController extends Controller {
 		$prod = PmtProductModel::where('tf_st','N')->get();
 		foreach ($prod as $data_prod) 
 		{
-			$pmt_product_id = $data_prod->pmt_product_id,
+			$pmt_product_id = $data_prod->pmt_product_id;
 			$data_pmprod = array(
 				'pmt_product_set_id' 	=> $data_prod->pmt_product_set_id,
 				'prod_code' 		=> $data_prod->prod_code,
@@ -456,7 +459,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_prod->updated_at,
 				'created_by' 		=> $data_prod->created_by,
 				'created_at'		=> $data_prod->created_at 
-			)
+			);
 
 
 			$insert_data = PmtProductModel_ho::create($data_pmprod);
@@ -470,7 +473,7 @@ class TransferController extends Controller {
 			);
 
 
-			$update_data =PmtProdModel::find($pmt_product_id);
+			$update_data =PmtProductModel::find($pmt_product_id);
 			$update_data->update($data_prod_upd);
 		}
 
@@ -480,7 +483,7 @@ class TransferController extends Controller {
 		$prodset = PmtProductSetModel::where('tf_st','N')->get();
 		foreach ($prodset as $data_prodset) 
 		{
-			$pmt_product_set_id = $data_prodset->pmt_product_set_id,
+			$pmt_product_set_id = $data_prodset->pmt_product_set_id;
 			$data_pmprodset = array(
 				'product_set_code' 	=> $data_prodset->product_set_code,
 				'pmt_group_code' 	=> $data_prodset->pmt_group_code,
@@ -499,7 +502,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_prodset->updated_at,
 				'created_by' 		=> $data_prodset->created_by,
 				'created_at'		=> $data_prodset->created_at 
-			)
+			);
 
 
 			$insert_data = PmtProductSetModel_ho::create($data_pmprodset);
@@ -524,11 +527,11 @@ class TransferController extends Controller {
 		$trans = PmtTransMastModel::where('tf_st','N')->get();
 		foreach ($trans as $data_trans) 
 		{
-			$transaction_id = $data_trans->transaction_id,
+			$transaction_id = $data_trans->transaction_id;
 			$data_pmtrans = array(
 				'transaction_code' 	=> $data_trans->transaction_code ,
 				'pmt_group_code' 	=> $data_trans->pmt_group_code ,
-				'transaction_name' 	=> $data_trans->transaction_name ,
+				'trnsaction_name' 	=> $data_trans->trnsaction_name ,
 				'rec_status' 		=> $data_pkdet->rec_status,
 				'tf_st'			=> 'Y',	
 				'tf_by'			=> Auth::user()->username,
@@ -537,7 +540,7 @@ class TransferController extends Controller {
 				'updated_at' 		=> $data_trans->updated_at,
 				'created_by' 		=> $data_trans->created_by,
 				'created_at'		=> $data_trans->created_at 
-			)
+			);
 
 
 			$insert_data = PmtTransMastModel_ho::create($data_pmtrans);
@@ -617,11 +620,16 @@ class TransferController extends Controller {
 			$cos_invmast_insert = CosInvmast_ho::create($data_cos_mast);
 			$insertedId = $cos_invmast_insert->id;
 
+			
+
+			//dd($insertedId);
 			if($cos_invmast_insert)
 			{
-				
-				$det = Cosinvdet::where('id',$id)->get();
+				//dd($cos_invmast_insert);
 
+				$det = Cosinvdet::where('cos_invmast_id',$id)->get();
+
+				//dd($det);
 				foreach ($det as $data_det) 
 				{
 					$data_cos_det = array(
@@ -641,16 +649,18 @@ class TransferController extends Controller {
 								'sp_size'		=> $data_det->sp_size,
 								'sp_size_desc'		=> $data_det->sp_size_desc,
 								'pmt_product_set_id' 	=> $data_det->pmt_product_set_id,
-								'created_by'		=> $data_det->crested_by,
+								'created_by'		=> $data_det->created_by,
 								'created_at'		=> $data_det->created_at
 
 							);
+
+					//dd($data_cos_det);
 					$cos_invmast_det = CosInvdet_ho::create($data_cos_det);
 
 
 				}
 
-				$prod = Cosinvdetproduct::where('id',$id)->get();
+				$prod = Cosinvdetproduct::where('cos_invmast_id',$id)->get();
 
 				foreach ($prod as $data_prod) 
 				{
@@ -692,6 +702,7 @@ class TransferController extends Controller {
 				}
 
 			}
+			
 
 		}
 
@@ -701,11 +712,234 @@ class TransferController extends Controller {
 
 
 	public function ho2cos()
-	{
+	{	
 		$sql = "select * from cos_invmast where cust_code='" . Auth::user()->current_cust_code_logon . "' and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
-		$data = DB::select($sql); 
+		$data = DB::connection('mysql2')->select($sql); 
 		return view('transferdata.data_ho2cos')->with('sales',$data);
 	
+	}
+
+	public function ho2cos_process()
+	{
+		// Product Data
+		$prod = Product_ho::where('tf_st','N')->get();
+
+		//dd($cust);
+		foreach ($prod as $data_prod) 
+		{
+			$product_id = $data_prod->product_id;
+			$data_product = array(
+				'prod_code'		=> $data_prod->prod_code,
+				'prod_tname' 		=> $data_prod->prod_tname,
+				'bar_code'		=> $data_prod->bar_code,
+				'pdgrp_code'		=> $data_prod->pdgrp_code,
+				'pdbrnd_code'		=> $data_prod->pdbrnd_code,
+				'pddsgn_code'		=> $data_prod->pddsgn_code,
+				'pdsize_code' 		=> $data_prod->pdsize_code,
+				'pdcolor_code'		=> $data_prod->pdcolor_code,
+				'pdmodel_code'	=> $data_prod->pdmodel_code,
+				'pdgrp_desc'		=> $data_prod->pdgrp_desc,
+				'pdbrnd_desc'		=> $data_prod->pdbrnd_desc,
+				'pddsgn_desc'		=> $data_prod->pddsgn_desc,
+				'pdsize_desc'		=> $data_prod->pdsize_desc,
+				'pdcolor_desc'		=> $data_prod->pdcolor_desc,
+				'pdmodel_desc'	=> $data_prod->pdmodel_desc,
+				'unit_price_amt'	=> $data_prod->unit_price_amt,
+				'rec_status' 		=> $data_prod->rec_status,
+				'tf_st'			=> 'Y',	
+				'tf_by'			=> Auth::user()->username,
+				'tf_date'		=> date('Y-m-d'),
+				'created_by'		=> $data_prod->created_by,
+				'creaed_at'		=> $data_prod->created_at,
+				'updated_by'		=> $data_prod->updated_by,
+				'updated_at'		=> $data_prod->updated_at
+			);
+
+			//dd($data_customer);
+
+			$insert_data = Product::create($data_product);
+
+			
+			$data_prod_upd = array(
+						'tf_st' => 'Y',			
+						'tf_by' => Auth::user()->username,
+						'tf_date' => date('Y-m-d'),
+						'updated_by' => Auth::user()->username,
+			);
+
+
+			$data_update =Product_ho::find($product_id);
+			$data_update->update($data_prod_upd);	
+		}
+
+
+		// Cos_Product
+		$cosprod = CosProduct_ho::where('tf_st','N')->where('cos_emtity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->get();
+
+		//dd($cust);
+		foreach ($prod as $data_cosprod) 
+		{
+			$id = $data_cosprod->id;
+			$data_cosproduct = array(			
+				'cos_no'		=> $data_cosprod->cos_no,
+				'cos_entity'		=> $data_cosprod->cos_entity,
+				'cust_code'  		=> $data_cosprod->cust_code,
+				'prod_code'		=> $data_cosprod->prod_code,
+				'prod_name'		=> $data_cosprod->prod_name,
+				'bar_code'		=> $data_cosprod->bar_code,
+				'unit_price'		=> $data_cosprod->unit_price,
+				'sale_price'		=> $data_cosprod->sale_price,
+				'qty_production'	=> $data_cosprod->qty_production,	
+				'qty_return'		=> $data_cosprod->qty_return,
+				'qty_sale'		=> $data_cosprod->qty_sale,
+				'qty_remand'		=> $data_cosprod->qty_remand,
+				'qty_bal'		=> $data_cosprod->qty_bal,
+				'pdgrp_code'		=> $data_cosprod->pdgrp_code,
+				'pdgrp_desc'		=> $data_cosprod->pdgrp_desc,
+				'pdbrnd_code'		=> $data_cosprod->pdbrnd_code,
+				'pdbrnd_desc'		=> $data_cosprod->pdbrnd_desc,
+				'pdtype_code'		=> $data_cosprod->pdtype_code,
+				'pdtype_desc'		=> $data_cosprod->pdtype_desc,
+				'pddsgn_code'		=> $data_cosprod->pddsgn_code,
+				'pddsgn_desc'		=> $data_cosprod->pddsgn_desc,
+				'pdsize_code'		=> $data_cosprod->pdsize_code,
+				'pdsize_desc'		=> $data_cosprod->pdsize_desc,
+				'pdcolor_code'		=> $data_cosprod->pdcolor_code,
+				'pdcolor_desc'		=> $data_cosprod->pdcolor_desc,
+				'pdmisc_code'		=> $data_cosprod->pdmisc_code,
+				'pdmisc_desc'		=> $data_cosprod->pdmisc_desc,
+				'pdmodel_code'	=> $data_cosprod->pdmodel_code,
+				'pdmodel_desc'	=> $data_cosprod->pdmodel_desc,
+				'tf_st'			=> 'Y',	
+				'tf_by'			=> Auth::user()->username,
+				'tf_date'		=> date('Y-m-d'),
+				'prod_st'		=> $data_cosprod->prod_st,
+				'created_by'		=> $data_cosprod->created_by,
+				'creaed_at'		=> $data_cosprod->created_at,
+				'updated_by'		=> $data_cosprod->updated_by,
+				'updated_at'		=> $data_cosprod->updated_at
+			);
+
+			//dd($data_customer);
+
+			$insert_data = CosProduct::create($data_cosproduct);
+
+			
+			$data_cosprod_upd = array(
+						'tf_st' => 'Y',			
+						'tf_by' => Auth::user()->username,
+						'tf_date' => date('Y-m-d'),
+						'updated_by' => Auth::user()->username,
+			);
+
+
+			$data_update =CosProduct_ho::find($id);
+			$data_update->update($data_cosprod_upd);	
+		}
+
+
+
+		// CO / SO Data
+		$sql = "select * from cos_invmast where cust_code='" . Auth::user()->current_cust_code_logon . "'  and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
+		$data = DB::connection('mysql2')->select($sql); 
+
+		//dd($data);
+		foreach ($data as $data_mast) 
+		{
+			$id = $data_mast->id;
+			$data_cos_mast = array(
+				'cos_entity'	=> $data_mast->cos_entity,
+				'cos_no'	=> $data_mast->cos_no,
+				'doc_code'	=> $data_mast->doc_code,
+				'doc_no' 	=> $data_mast->doc_no,
+				'doc_date' 	=> $data_mast->doc_date,  
+				'req_date' 	=> $data_mast->req_date,   
+				'pmt_no' 	=> $data_mast->pmt_no, 
+				'cust_code'	=> $data_mast->cust_code,
+				'cust_name'	=> $data_mast->cust_name,
+				'ship_titlename'	=> $data_mast->ship_titlename,
+				'ship_custname'	=> $data_mast->ship_custname,
+				'ship_custsurname'	=> $data_mast->ship_custsurname, 
+				'ship_address1'	=> $data_mast->ship_address1,
+				'ship_address2'	=> $data_mast->ship_address2,
+				'prov_code'	=> $data_mast->prov_code,
+				'prov_name'	=> $data_mast->prov_name,
+				'post_code'	=> $data_mast->post_code,
+				'ship_tel'		=> $data_mast->ship_tel,
+				'email_address'	=> $data_mast->email_address,
+				'po_file'	=> $data_mast->po_file,
+				'gp1'		=> $data_mast->gp1,
+				'gp2'		=> $data_mast->gp2,
+				'gp3'		=> $data_mast->gp3,
+				'pay_code'	=> $data_mast->pay_code,
+				'pay_name'	=> $data_mast->pay_name,
+				'pm_total_price'	=> $data_mast->pm_total_price,
+				'pm_price'	=> $data_mast->pm_price,
+				'remark1'	=> $data_mast->remark1,
+				'vat_rate'	=> $data_mast->vat_rate,
+				'doc_status'	=> $data_mast->doc_status,
+				'tot_qty'	=> $data_mast->tot_qty,
+				'tot_amt'	=> $data_mast->tot_amt,
+				'tot_netamt'	=> $data_mast->tot_netamt,
+				'tot_discamt'	=> $data_mast->tot_discamt,
+				'created_by'	=> $data_mast->created_by,
+				'created_at'	=> $data_mast->created_at			
+			);
+			
+			//dd($data_cos_mast);
+
+
+			$cos_invmast_insert = CosInvmast::create($data_cos_mast);
+			$insertedId = $cos_invmast_insert->id;
+
+			
+
+			//dd($insertedId);
+			if($cos_invmast_insert)
+			{
+				$det = Cosinvdet_ho::where('cos_invmast_id',$id)->get();
+
+				//dd($det);
+				foreach ($det as $data_det) 
+				{
+					$data_cos_det = array(
+
+								'cos_invmast_id'	=> $insertedId,
+								'cos_entity'		=> $data_det->cos_entity,
+								'cos_no'		=> $data_det->cos_no,
+								'doc_code'		=> $data_det->doc_code,
+								'doc_no'		=> $data_det->doc_no,
+								'item'			=> $data_det->item,
+								'prod_code'		=> $data_det->prod_code,
+								'prod_name' 		=> $data_det->prod_name,
+								'qty'			=> $data_det->qty,
+								'sale_price'		=> $data_det->sale_price,
+								'amt'			=> $data_det->amt,
+								'vat_rate'		=> $data_det->vat_rate,
+								'sp_size'		=> $data_det->sp_size,
+								'sp_size_desc'		=> $data_det->sp_size_desc,
+								'pmt_product_set_id' 	=> $data_det->pmt_product_set_id,
+								'created_by'		=> $data_det->created_by,
+								'created_at'		=> $data_det->created_at
+
+							);
+
+					//dd($data_cos_det);
+					$cos_invmast_det = CosInvdet::create($data_cos_det);
+
+					// Update Cos_Proudct
+
+					DB::Table('cos_product')->where('cos_emtity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->where('prod_code',$data_det->prod_code)->increment('qty_production', $data_det->qty)->increment('qty_bal', $data_det->qty);
+
+
+
+
+				}
+
+			}
+		}
+ 
+
 	}
 
 }
