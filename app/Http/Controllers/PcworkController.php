@@ -37,7 +37,7 @@ class PcworkController extends Controller {
 		}
 
 
-		$data_pc = CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->orderBy('work_date','asc')->get();
+		$data_pc = CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->where('year',date('Y'))->where('month',date('m'))->orderBy('work_date','asc')->get();
 
 		$pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->get(['emp_name']);
 		//dd($pc);
@@ -386,6 +386,26 @@ class PcworkController extends Controller {
 	}
 
 
+	public function pcworksearch()
+	{
+		return view('commission.pcwork_search');
+	}
 
+	public function pcworksearch_process()
+	{
+
+		$emp_code = Request::input('emp_code');
+		$year = Request::input('year');
+		$month = Request::input('month');
+
+		$data_pc = CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->where('year',$year)->where('month',$month)->orderBy('work_date','asc')->get();
+
+		$pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->get(['emp_name']);
+		//dd($pc);
+		
+		return view('commission.pcwork')->with(array('pcwork'=>$data_pc,
+							'emp_code'=>$emp_code
+							));
+	}
 
 }

@@ -34,6 +34,8 @@ Route::get('pcwork/{emp_code}/create', ['as' => 'pcwork.create', 'uses' => 'Pcwo
 Route::get('pctime', 'PcworkController@pctime');
 Route::post('workIn', 'PcworkController@workIn');
 Route::post('workOut', 'PcworkController@workOut');
+Route::get('pcworksearch', 'PcworkController@pcworksearch');
+Route::post('pcworksearch_process', 'PcworkController@pcworksearch_process');
 
 Route::get('commissionclass/{class}', ['as' => 'comclass.index', 'uses' => 'ComclassController@index']);
 

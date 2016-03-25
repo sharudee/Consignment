@@ -9,6 +9,7 @@
 
 		<button type="button" class="btn btn-primary solsoShowModal"  data-toggle="modal" data-target="#solsoCrudModal" data-href="{{URL::to('pcwork/'. $emp_code . '/create') }}" data-modal-title="Create Work Schedule">
 		<i class="fa fa-plus"></i> Gen Data</button>
+		<a href="{{URL::to('pcworksearch')}}" class="btn btn-primary " ><i class="fa fa-search"></i>Search</a>
 		<br>
 		<br>
 
