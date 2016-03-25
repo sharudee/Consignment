@@ -39,13 +39,13 @@ class SaleController extends Controller {
 
 	public function sales()
 	{
-		$data_sales = CosInvmast::where('cust_code',Auth::user()->current_cust_code_logon)->OrderBy('doc_no','desc')->get();
+		$data_sales = CosInvmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('doc_code','PO')->OrderBy('doc_no','desc')->get();
 		return view('sales.sales')->with('sales',$data_sales);
 	}
 
 	public function salesform()
 	{
-		$doc_code = DB::table('doc_mast')->where('doc_code', 'PO')->pluck('doc_code');
+		$doc_code = DB::table('doc_mast')->where('doc_code', 'PO')->pluck('doc_ctrl');
 		$cos_no = DB::table('entity')->where('entity_code', Auth::user()->current_cust_code_logon)->pluck('cos_no');
 		
 		$doc_head = $doc_code . $cos_no. date('ym');
@@ -240,7 +240,7 @@ class SaleController extends Controller {
 				
 
 				// หา Doc No ใหม่
-				$doc_code = DB::table('doc_mast')->where('doc_code', 'PO')->pluck('doc_code');
+				$doc_code = DB::table('doc_mast')->where('doc_code', 'PO')->pluck('doc_ctrl');
 				$cos_no = DB::table('entity')->where('entity_code', Auth::user()->current_cust_code_logon)->pluck('cos_no');
 				
 				$doc_head = $doc_code . $cos_no. date('ym');
@@ -303,10 +303,13 @@ class SaleController extends Controller {
 					'post_code'	=> Request::input('post_code'),
 					'ship_tel'		=> Request::input('tel'),
 					'email_address'	=> Request::input('email_address'),
+					'ref_no'	=> Request::input('ref_no'),
+					'dept'		=> Auth::user()->current_dept_code_logon,
 					//'po_file'		=> Request::input('po_file'),
 					'gp1'		=> Request::input('gp1'),
 					'gp2'		=> Request::input('gp2'),
 					'gp3'		=> Request::input('gp3'),
+					'ship_to'		=> Request::input('ship_to'),
 					'pay_code'	=> Request::input('pay_code'),
 					'pay_name'	=> Request::input('pay_name'),
 					'vat_rate'	=> $tax_rate,
@@ -528,10 +531,13 @@ class SaleController extends Controller {
 				'post_code'	=> Request::input('post_code'),
 				'ship_tel'		=> Request::input('tel'),
 				'email_address'	=> Request::input('email_address'),
+				'ref_no'	=> Request::input('ref_no'),
+				'dept'		=> Auth::user()->current_dept_code_logon,
 				'po_file'	=> Request::input('po_file'),
 				'gp1'		=> Request::input('gp1'),
 				'gp2'		=> Request::input('gp2'),
 				'gp3'		=> Request::input('gp3'),
+				'ship_to'	=> Request::input('ship_to'),
 				'pay_code'	=> Request::input('pay_code'),
 				'pay_name'	=> Request::input('pay_name'),
 				'pm_total_price'	=> Request::input('pm_total_price'),
@@ -663,6 +669,9 @@ class SaleController extends Controller {
 		$data_sale = DB::select($sql);
 
 		$cust_name = DB::table('entity')->where('entity_code',$data_mast->cust_code)->pluck('entity_tname');
+
+		$pmt_name = DB::table('pmt_mast')->where('pmt_no',$data_mast->pmt_no)->pluck('pmt_name');
+
 		$i =1;
 		$content ='
 		<p><h2>Purchase Order</h2></p>
@@ -687,27 +696,33 @@ class SaleController extends Controller {
 			
 
 			<tr>
-		     	<td width="100">Promotion</td>
-			<td width="300">' . $data_mast->pmt_no . '</td>
+			<td width="100">GP</td>
+			<td width="300">' . $data_mast->gp1 . '   ' . $data_mast->gp2 . '   ' . $data_mast->gp3 . '</td>
+		     	
 			<td width="80">ที่อยู่</td>
 			<td  colspan=3 width="320">' . $data_mast->ship_address1 . '</td>
 			</tr>
 
 
 			<tr>
-		     	<td width="100">GP</td>
-			<td width="300">' . $data_mast->gp1 . '   ' . $data_mast->gp2 . '   ' . $data_mast->gp3 . '</td>
+		     	<td width="100">Ref No.</td>
+			<td width="300">' . $data_mast->ref_no . '</td>
 			<td width="80"> </td>
 			<td  colspan=3 width="320">' . $data_mast->ship_address2 . '  ' . $data_mast->prov_name . '  ' . $data_mast->post_code .  '</td>
 			</tr>
 
 			<tr>
-		     	<td width="100"></td>
-			<td width="300"></td>
+		     	<td width="100">Ship To</td>
+			<td width="300">'. $data_mast->ship_to  . '</td>
 			<td width="80">โทรศัพท์</td>
 			<td width="120">' . $data_mast->ship_tel . '</td>
 			<td width="80">Email</td>
 			<td width="120">'. $data_mast->email_address  . '</td>
+			</tr>
+
+			<tr>
+		     	<td width="100">Promotion</td>
+			<td width="300" colspan=5>'. $data_mast->pmt_no . '  ' . $pmt_name . '</td>
 			</tr>
 			</table><br>
 
@@ -726,13 +741,13 @@ class SaleController extends Controller {
 				
 			
 			$content = $content . '<tr>
-			<td width="50" align="right" height="25">' . $dbarr->item . '</td>	
-			<td width="150">' . $dbarr->prod_code . '</td>
-			<td width="200">' . $dbarr->prod_name . '</td>	
-			<td width="80" align="right" >' . $dbarr->qty . '</td>	
-			<td width="100" align="right">' . number_format($dbarr->sale_price,2) . '</td>	
-			<td width="100" align="right">' . number_format($dbarr->amt,2) . '</td>	
-			<td width="100">' . $dbarr->sp_size_desc . '</td>
+			<td width="50" align="right" height="25"><font size="3">' . $dbarr->item . '</td>	
+			<td width="200"><font size="3">' . $dbarr->prod_code . '</td>
+			<td width="200"><font size="3">' . $dbarr->prod_name . '</td>	
+			<td width="50" align="right" ><font size="3">' . $dbarr->qty . '</td>	
+			<td width="80" align="right"><font size="3">' . number_format($dbarr->sale_price,2) . '</td>	
+			<td width="80" align="right"><font size="3">' . number_format($dbarr->amt,2) . '</td>	
+			<td width="100"><font size="3">' . $dbarr->sp_size_desc . '</td>
 			</tr>';
 			} 
 		
@@ -740,41 +755,41 @@ class SaleController extends Controller {
 			<tr>
 			<td width="50" align="right" height="30"></td>	
 			<td width="150"></td>
-			<td width="200">รวม</td>	
-			<td width="80" align="right" >' . $data_mast->tot_qty . '</td>	
+			<td width="200"><font size="3">รวม</td>	
+			<td width="80" align="right" ><font size="3">' . $data_mast->tot_qty . '</td>	
 			<td width="100" align="right"></td>	
-			<td width="100" align="right">' . number_format($data_mast->tot_amt,2) . '</td>	
+			<td width="100" align="right"><font size="3">' . number_format($data_mast->tot_amt,2) . '</td>	
 			<td width="100"></td>
 			</tr>
 			<tr>
 			<td width="480" align="right" height="30" colspan=4></td>	
-			<td width="100" align="right">ส่วนลด</td>	
-			<td width="100" align="right">' . number_format($data_mast->tot_discamt,2) . '</td>	
+			<td width="100" align="right"><font size="3">ส่วนลด</td>	
+			<td width="100" align="right"><font size="3">' . number_format($data_mast->tot_discamt,2) . '</td>	
 			<td width="100"></td>
 			</tr>
 			<tr>
 			<td width="480" align="right" height="30" colspan=4></td>	
 	
-			<td width="100" align="right">รวมทั้งสิ้น</td>	
-			<td width="100" align="right">' . number_format($data_mast->tot_netamt,2) . '</td>	
+			<td width="100" align="right"><font size="3">รวมทั้งสิ้น</td>	
+			<td width="100" align="right"><font size="3">' . number_format($data_mast->tot_netamt,2) . '</td>	
 			<td width="100"></td>
 			</tr>
 			</table><br>';
-		$content = $content . 'ชำระเงินโดย : ' . $data_mast->pay_name;
+		$content = $content . '<font size="3">ชำระเงินโดย : ' . $data_mast->pay_name;
 
-		$content = $content .'<br><br>พนักงานขาย';
+		$content = $content .'<br><br><font size="3">พนักงานขาย';
 		$content = $content . '<table>';
 		 foreach ($data_sale as  $dbsale) { 
 				
 			
 			$content = $content . '<tr>
 			<td width="50" align="right" height="25">' . $i . '</td>	
-			<td width="150">' . $dbsale->emp_name . '</td>
+			<td width="150"><font size="3">' . $dbsale->emp_name . '</td>
 			</tr>';
 			$i++;
 			} 
 		$content = $content . '</table>';
-		$content = $content . '<br><br>หมายเหตุ : ' . $data_mast->remark1;
+		$content = $content . '<br><br><font size="3">หมายเหตุ : ' . $data_mast->remark1;
 
 		$mpdf = new mPDF('th', 'A4', '0', 'Tahoma'); 
 		$mpdf->WriteHTML($content);

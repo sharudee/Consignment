@@ -12,8 +12,8 @@ use App\Http\Model\CosInvmast;
 use App\Http\Model\CosInvmast_ho;
 use App\Http\Model\CosInvdet;
 use App\Http\Model\CosInvdet_ho;
-use App\Http\Model\CosInvdetproduct;
-use App\Http\Model\CosInvdetproduct_ho;
+use App\Http\Model\CosInvdetProduct;
+use App\Http\Model\CosInvdetProduct_ho;
 use App\Http\Model\Custmast;
 use App\Http\Model\Custmast_ho;
 use App\Http\Model\PmtConsigneeModel;
@@ -40,6 +40,12 @@ use App\Http\Model\Product;
 use App\Http\Model\Product_ho;
 use App\Http\Model\PmtMastModel;
 use App\Http\Model\PmtMastModel_ho;
+use App\Http\Model\CosProduct;
+use App\Http\Model\CosProduct_ho;
+use App\Http\Model\CosPcmast;
+use App\Http\Model\CosPcmast_ho;
+use App\Http\Model\CosPcwork;
+use App\Http\Model\CosPcwork_ho;
 
 
 
@@ -660,7 +666,7 @@ class TransferController extends Controller {
 
 				}
 
-				$prod = Cosinvdetproduct::where('cos_invmast_id',$id)->get();
+				$prod = CosInvdetProduct::where('cos_invmast_id',$id)->get();
 
 				foreach ($prod as $data_prod) 
 				{
@@ -679,7 +685,7 @@ class TransferController extends Controller {
 								'created_at'		=> $data_prod->creaed_at
 
 							);
-					$cos_invmast_prod = CosInvdetproduct_ho::create($data_cos_product);
+					$cos_invmast_prod = CosInvdetProduct_ho::create($data_cos_product);
 				}
 
 
@@ -695,17 +701,17 @@ class TransferController extends Controller {
 				$data_update =CosInvmast::find($id);
 				$data_update->update($data_upd);	
 
-				if($data_update)
-				{
-					return "Success";
-					
-				}
+				
 
 			}
 			
 
 		}
-
+		if($data_update)
+		{
+			return "Success";
+					
+		}
 
 		
 	}
@@ -713,7 +719,7 @@ class TransferController extends Controller {
 
 	public function ho2cos()
 	{	
-		$sql = "select * from cos_invmast where cust_code='" . Auth::user()->current_cust_code_logon . "' and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
+		$sql = "select * from cos_invmast where  cos_entity = '" . Auth::user()->current_entity_code_logon . "' and cust_code='" . Auth::user()->current_cust_code_logon . "' and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
 		$data = DB::connection('mysql2')->select($sql); 
 		return view('transferdata.data_ho2cos')->with('sales',$data);
 	
@@ -724,7 +730,7 @@ class TransferController extends Controller {
 		// Product Data
 		$prod = Product_ho::where('tf_st','N')->get();
 
-		//dd($cust);
+		//dd($prod);
 		foreach ($prod as $data_prod) 
 		{
 			$product_id = $data_prod->product_id;
@@ -755,7 +761,7 @@ class TransferController extends Controller {
 				'updated_at'		=> $data_prod->updated_at
 			);
 
-			//dd($data_customer);
+			//dd($data_product);
 
 			$insert_data = Product::create($data_product);
 
@@ -774,14 +780,13 @@ class TransferController extends Controller {
 
 
 		// Cos_Product
-		$cosprod = CosProduct_ho::where('tf_st','N')->where('cos_emtity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->get();
+		$cosprod = CosProduct_ho::where('tf_st','N')->where('cos_entity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->get();
 
-		//dd($cust);
+		//dd($cosprod);
 		foreach ($prod as $data_cosprod) 
 		{
 			$id = $data_cosprod->id;
 			$data_cosproduct = array(			
-				'cos_no'		=> $data_cosprod->cos_no,
 				'cos_entity'		=> $data_cosprod->cos_entity,
 				'cust_code'  		=> $data_cosprod->cust_code,
 				'prod_code'		=> $data_cosprod->prod_code,
@@ -840,7 +845,7 @@ class TransferController extends Controller {
 
 
 		// CO / SO Data
-		$sql = "select * from cos_invmast where cust_code='" . Auth::user()->current_cust_code_logon . "'  and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
+		$sql = "select * from cos_invmast where cos_entity = '" . Auth::user()->current_entity_code_logon . "' and cust_code='" . Auth::user()->current_cust_code_logon . "'  and ifnull(tf_st,'N')='N' and doc_code in (select doc_code from doc_mast where post_type='HO')";
 		$data = DB::connection('mysql2')->select($sql); 
 
 		//dd($data);
@@ -897,7 +902,7 @@ class TransferController extends Controller {
 			//dd($insertedId);
 			if($cos_invmast_insert)
 			{
-				$det = Cosinvdet_ho::where('cos_invmast_id',$id)->get();
+				$det = CosInvdet_ho::where('cos_invmast_id',$id)->get();
 
 				//dd($det);
 				foreach ($det as $data_det) 
@@ -929,17 +934,126 @@ class TransferController extends Controller {
 
 					// Update Cos_Proudct
 
-					DB::Table('cos_product')->where('cos_emtity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->where('prod_code',$data_det->prod_code)->increment('qty_production', $data_det->qty)->increment('qty_bal', $data_det->qty);
-
+					$update = DB::Table('cos_product')->where('cos_entity',Auth::user()->current_entity_code_logon)->where('cust_code',Auth::user()->current_cust_code_logon)->where('prod_code',$data_det->prod_code)->increment('qty_production', $data_det->qty)->increment('qty_bal', $data_det->qty);
+					//dd($update);
 
 
 
 				}
 
+				$data_upd = array(
+						'tf_st' => 'Y',			
+						'tf_by' => Auth::user()->username,
+						'tf_date' => date('Y-m-d'),
+						'doc_status' => 'APV',
+						'updated_by' => Auth::user()->username,
+				);
+				$data_update =CosInvmast_ho::find($id);
+				$data_update->update($data_upd);	
+
+				
+
 			}
 		}
- 
+ 		
+ 		if($data_update)
+		{
+			return "Success";			
+		}		
 
+	}
+
+	public function pcwork()
+	{
+		$sql = "select a.emp_code , b.emp_name , a.work_date , a.work_type , time_start , time_end from cos_pcwork a , cos_pcmast b  where a.emp_code=b.emp_code and  a.cust_code='" . Auth::user()->current_cust_code_logon . "' and  ifnull(a.tf_st,'N')='N'";
+		$data = DB::select($sql); 
+		return view('transferdata.data_pcwork')->with('pc',$data);
+	}
+
+	public function pcwork_process()
+	{
+		// PC Mast
+		$pc = CosPcmast::where('tf_st','N')->where('cust_code',Auth::user()->current_cust_code_logon)->get();
+		foreach ($pc as $data_pc) 
+		{
+			$pc_id = $data_pc->id;
+			$data_pcmast = array(
+				'cust_code'		=> $data_pc->cust_code,
+		  		'emp_code'		=> $data_pc->emp_code,
+		  		'emp_name'		=> $data_pc->emp_name,
+		  		'tel'			=> $data_pc->tel,
+		  		'email'			=> $data_pc->email,
+				'tf_st'			=> 'Y',	
+				'tf_by'			=> Auth::user()->username,
+				'tf_date'		=> date('Y-m-d'),
+				'updated_by'		=> $data_pc->updated_by,
+				'updated_at' 		=> $data_pc->updated_at,
+				'created_by' 		=> $data_pc->created_by,
+				'created_at'		=> $data_pc->created_at 
+			);
+
+
+			$insert_data = CosPcmast_ho::create($data_pcmast);
+
+			
+			$data_pc_upd = array(
+						'tf_st' => 'Y',			
+						'tf_by' => Auth::user()->username,
+						'tf_date' => date('Y-m-d'),
+						'updated_by' => Auth::user()->username,
+			);
+
+
+			$update_data =CosPcmast::find($pc_id);
+			$update_data->update($data_pc_upd);
+		}
+
+
+		// PC Work
+
+		$pcwork = CosPcwork::where('tf_st','N')->where('cust_code',Auth::user()->current_cust_code_logon)->get();
+		foreach ($pcwork as $data_pcwork) 
+		{
+			$pcwork_id = $data_pcwork->id;
+			$data_work = array(
+				'year' 			=> $data_pcwork->year,
+				'month'			=> $data_pcwork->month,
+				'cust_code' 		=> $data_pcwork->cust_code,
+				'emp_code'		=> $data_pcwork->emp_code,
+				 'work_date'		=> $data_pcwork->work_date,
+				 'work_type'		=> $data_pcwork->work_type,
+				 'pc_type'		=> $data_pcwork->pc_type,
+				 'time_start'		=> $data_pcwork->time_start,
+				 'time_end'		=> $data_pcwork->time_end,
+				'tf_st'			=> 'Y',	
+				'tf_by'			=> Auth::user()->username,
+				'tf_date'		=> date('Y-m-d'),
+				'updated_by'		=> $data_pcwork->updated_by,
+				'updated_at' 		=> $data_pcwork->updated_at,
+				'created_by' 		=> $data_pcwork->created_by,
+				'created_at'		=> $data_pcwork->created_at 
+			);
+
+
+			$insert_data = CosPcwork_ho::create($data_work);
+
+			
+			$data_pcwork_upd = array(
+						'tf_st' => 'Y',			
+						'tf_by' => Auth::user()->username,
+						'tf_date' => date('Y-m-d'),
+						'updated_by' => Auth::user()->username,
+			);
+
+
+			$update_data =CosPcwork::find($pcwork_id);
+			$update_data->update($data_pcwork_upd);
+		}
+
+		if($update_data)
+		{
+			return "Success";			
+		}
 	}
 
 }

@@ -5,7 +5,10 @@
 </header>
 
 <main class="body slide">
-	<aside class="sidebar show">@include('include.sidebar')</aside>
+	<aside class="sidebar show">
+		@include('include.sidebar')
+	</aside>
+	
 	<div class="container-fluid solso-content">
 	<div class="row">
 		@yield('content')

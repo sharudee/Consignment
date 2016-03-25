@@ -67,7 +67,7 @@
             </div> 
 
 </div>
-
+@include('modals.modal-crud-comm')
     <div class="modal fade rolemodal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="rolemodal">
@@ -75,7 +75,5 @@
             </div>
         </div>
     </div>
-
-@include('modals.modal-crud-comm')
 
 @stop

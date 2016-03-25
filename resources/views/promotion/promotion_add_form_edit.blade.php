@@ -1,4 +1,4 @@
-﻿@foreach($result_data_obj as $crt => $v)
+@foreach($result_data_obj as $crt => $v)
 <div class="modal-body">
 	<form class="form-horizontal">
 	<input type="hidden"  id= "txtpmt_mast_id" type="hidden" name="txtpmt_mast_id" value="{{$v->pmt_mast_id}}"  />

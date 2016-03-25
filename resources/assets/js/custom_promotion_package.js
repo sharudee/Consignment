@@ -80,16 +80,16 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
 		$("input[name='product_premuim_setcode[]']").each(function ()
 		{
-			$("input[name='product_premuim_setcode[]']").prop("checked","checked")
+			$("input[name='product_premuim_setcode[]']").prop("checked",true)
 		});
 	});
 
 // Select All Un Check box  
 	$('body').on('click','button#submit_unselect_product_all',function(){
 		//alert('กรุณาเลือกอย่างน้อย 1 รายการ');
-		$("input[name='product_premuim_setcode[]']").each(function ()
+		$("input[name='product_premuim_setcode[]']:checked").each(function ()
 		{
-			$("input[name='product_premuim_setcode[]']").removeAttr("checked")
+			$("input[name='product_premuim_setcode[]']").prop("checked",false)
 		});
 	});
 
@@ -165,6 +165,7 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 		var total_price_amt_h = $("input#total_price_amt").val(); 
 		var special1_price_amt_h = $("input#special1_price_amt").val(); 
 		var special2_price_amt_h = $("input#special2_price_amt").val();  
+		var pm_total_price = $("input#pm_total_price").val();  
 
 		var pdmodel_desc_h = $("input#pdmodel_desc_h").val();  
 		var pdsize_desc_h = $("input#pdsize_desc_h").val();  
@@ -232,6 +233,7 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 				product_set_desc:product_set_desc,
 				set_price_amt:set_price_amt,
 				set_qty:set_qty,
+				pm_total_price:pm_total_price,
 				uom:uom
 			},
 
@@ -271,6 +273,8 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 
 		var pdmodel_desc_h = $("input#pdmodel_desc_h").val();  
 		var pdsize_desc_h = $("input#pdsize_desc_h").val();  
+		var pm_total_price = $("input#pm_total_price").val();  
+
 
 		var _token = $("input[name=_token]").val();
 
@@ -336,6 +340,7 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 				product_set_desc:product_set_desc,
 				set_price_amt:set_price_amt,
 				set_qty:set_qty,
+				pm_total_price:pm_total_price,
 				uom:uom
 			},
 
@@ -350,6 +355,9 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 					//window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
 					//redi window.location.href = "pmtpackagecontact";
 					window.location.href ="";
+				}else
+				{
+					swal("ไม่สามารภแก้ไขข้อมูลได้", "กรุณาตรวจสอบ สถานะอนุมัติใช้งาน หรือ ยกเลิก Promotion ไปแล้ว!", "error");
 				}
 			},
 
@@ -454,6 +462,9 @@ $('body').on('click','a[rel=click_pdsize_code_package]',function(){
 					//window.location.replace("http://localhost/cos/pmtpackagecontact/"+pmt_mast_id); 
 					//redi window.location.href = "pmtpackagecontact";
 					window.location.href ="";
+				}else
+				{
+					swal("ไม่สามารภ ลบ รายการข้อมูลได้", "กรุณาตรวจสอบ สถานะอนุมัติใช้งาน หรือ ยกเลิก Promotion ไปแล้ว!", "error");
 				}
 			},
 

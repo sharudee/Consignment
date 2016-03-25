@@ -9,6 +9,8 @@ use Request;
 use Validator;
 use Input;
 use Auth;
+use MPDF;
+use DB;
 
 // Model
 use App\Http\Model\Entity;
@@ -65,7 +67,7 @@ class EntityController extends Controller {
 			'entity_tname'		=> 'required|Max:50',
 			'entity_ename'		=> 'Max:50',
 			'ent_ctrl'		=> 'Max:8',
-			'cos_no'		=> 'required|Max:2',
+			'cos_no'		=> 'required|Max:3',
 			'tax_rate'		=> 'required|Numeric',
 			'cust_grp'		=> 'required|Max:4',
 			'dsgrp_type'		=> 'required',
@@ -189,7 +191,7 @@ class EntityController extends Controller {
 			'entity_tname'		=> 'required|Max:50',
 			'entity_ename'		=> 'Max:50',
 			'ent_ctrl'		=> 'Max:8',
-			'cos_no'		=> 'required|Max:2',
+			'cos_no'		=> 'required|Max:3',
 			'tax_rate'		=> 'required|Numeric',
 			'cust_grp'		=> 'required|Max:4',
 			'dsgrp_type'		=> 'required',
@@ -329,5 +331,70 @@ class EntityController extends Controller {
 	}
 
 
+	public function entityprint()
+	{
+
+		$data_grp = Custgrp::orderBy('custgrp_code','asc')->get();
+		return view('masterdata.entity_print')->with('custgrp',$data_grp);
+	}
+
+	public function entityreport()
+	{
+		
+		if (Request::Input('entity_code1') == "")
+		{
+			$entity1 = "A";
+		}
+		else
+		{
+			$entity1 = Request::Input('entity_code1');
+		}
+
+		if (Request::Input('entity_code2') == "")
+		{
+			$entity2 = "Z";
+		}
+		else
+		{
+			$entity2 = Request::Input('entity_code2');
+		}
+
+		$sql = "select entity_code , entity_tname , entity_ename , cos_no , cust_grp , tax_rate , ent_ctrl , dsgrp_type , sale_type from entity where entity_code between '" . $entity1  . "' and '" .  $entity2  . "'  and cust_grp between '" .  Request::Input('cust_grp1') . "' and '" . Request::Input('cust_grp2') . "' order by entity_code";
+		$data = DB::select($sql);
+
+		$content ='<p><h2>Entity</h2></p>
+		<table border="1" bordercolor="#424242" cellpadding="0" cellspacing="0">
+			<tr>
+			<td align="center" bgcolor="#D5D5D5" height="25">Entity Code</td>	
+			<td align="center" bgcolor="#D5D5D5">Entity Name (Thai)</td>
+			<td align="center" bgcolor="#D5D5D5">Entity Name (English)</td>	
+			<td align="center" bgcolor="#D5D5D5">COS No.</td>	
+			<td align="center" bgcolor="#D5D5D5">Cust Group</td>	
+			<td align="center" bgcolor="#D5D5D5">Tax Rate</td>	
+			<td align="center" bgcolor="#D5D5D5">Sale Type</td>
+			</tr align="center" bgcolor="#D5D5D5">';
+
+			 foreach ($data as  $dbarr) { 
+				
+			
+			$content = $content . '<tr>
+			<td width="50" align="left" height="25"><font size="3">' . $dbarr->entity_code . '</td>	
+			<td width="200"><font size="3">' . $dbarr->entity_tname . '</td>
+			<td width="200"><font size="3">' . $dbarr->entity_ename . '</td>	
+			<td width="70" align="center" ><font size="3">' . $dbarr->cos_no . '</td>	
+			<td width="80" align="center"><font size="3">' . $dbarr->cust_grp . '</td>	
+			<td width="80" align="right"><font size="3">' . $dbarr->tax_rate . '</td>	
+			<td width="80"><font size="3">' . $dbarr->sale_type . '</td>
+			</tr>';
+			} 
+		
+		$content = $content . '</table><br>';
+
+
+		$mpdf = new mPDF('th', 'A4', '0', 'Tahoma'); 
+		$mpdf->WriteHTML($content);
+		$mpdf->Output();
+
+	}
 
 }

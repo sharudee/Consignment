@@ -10,6 +10,9 @@
 		<button type="button" class="btn btn-primary solsoShowModal"  data-toggle="modal" data-target="#solsoCrudModal" data-href="{{URL::to('entity/create')}}" data-modal-title="Create Entity">
 		<i class="fa fa-plus"></i> New entity</button>
 
+		
+		<a href="{{URL::to('entityprint')}}" class="btn btn-primary "  target="_blank"><i class="fa fa-print"></i> พิมพ์</a>
+
 		<div class="col-md-12 top40">
 			<h3>Entity</h3>
 			<div id="ajaxTable" class="table-responsive">

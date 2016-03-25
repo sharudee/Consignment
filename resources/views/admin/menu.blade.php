@@ -66,7 +66,7 @@
             </div> 
 
 </div>
-
+@include('modals.modal-crud-comm')
     <div class="modal fade menumodal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="menumodal">
@@ -75,6 +75,20 @@
         </div>
     </div>
 
-@include('modals.modal-crud-comm')
+    <div class="modal fade popup_system_modal" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="popup_system_modal">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade popup_program_modal" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="popup_program_modal">
+                
+            </div>
+        </div>
+    </div>  
 
 @stop

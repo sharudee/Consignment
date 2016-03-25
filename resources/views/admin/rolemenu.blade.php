@@ -58,8 +58,6 @@
                 </div>
  
 
-  <!--       <a href="#" rel="newconsignnee" class="btn btn-md btn-primary"><i class="fa fa-plus-square-o"></i>เพิ่มข้อมูล ห้าง</a> -->
- <!--        <legend></legend> -->
 
             <div id="ajaxTable" class="table-responsive top10">
                 @include('admin.rolemenu_lv') 
@@ -71,19 +69,34 @@
 
     <!-- Modal Customer -->
 
-    <div class="modal fade consignnee_grp_modal" data-backdrop="static">
+    <div class="modal fade rolemenu_modal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="consignnee_grp_modal">
+            <div class="modal-content" id="rolemenu_modal">
                 
             </div>
         </div>
     </div>
-    <div class="modal fade consignnee_modal" data-backdrop="static">
+    <div class="modal fade popup_system_modal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="consignnee_modal">
+            <div class="modal-content" id="popup_system_modal">
                 
             </div>
         </div>
     </div>
 
+    <div class="modal fade popup_system_menu" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="popup_system_menu">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade popup_memu_by_system" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="popup_memu_by_system">
+                
+            </div>
+        </div>
+    </div>
 @stop

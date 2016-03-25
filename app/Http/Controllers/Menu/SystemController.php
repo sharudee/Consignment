@@ -70,6 +70,19 @@ class SystemController extends Controller {
 	public function summitnewsystem()
 	{
 		$username = Auth::user()->username ;
+		$SystemCode =  Request::input('SystemCode');
+
+		$check 	= DB::table('su_system')
+			            ->where ('SystemCode','=',$SystemCode)
+			            ->first();
+
+
+		if ( $check <> NULL) 
+		{
+			return "Insert_No_Success";
+		}	            
+
+
 		if(!empty(Request::input('SystemCode')))
 		{
 			$data_head = array(

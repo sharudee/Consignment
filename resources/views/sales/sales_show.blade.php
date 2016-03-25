@@ -95,7 +95,13 @@
 							</div>
 						</div>
 
+					<div class="col-sm-1 ">
+						<label >Email</label>
+					</div>
 
+					<div class="col-sm-2">
+						<input type="text" name="email" id="email" class="form-control input-sm" value="{{$data_mast->email_address}}">
+					</div>
 						
 					 
 
@@ -113,11 +119,11 @@
 					</div>
 
 					<div class="col-sm-1 col-sm-offset-2">
-						<label >Email</label>
+						<label >Ref No.</label>
 					</div>
 
 					<div class="col-sm-2">
-						<input type="text" name="email" id="email" class="form-control input-sm" value="{{$data_mast->email_address}}">
+						<input type="text" name="email" id="email" class="form-control input-sm" value="{{$data_mast->ref_no}}">
 					</div>
 				</div>
 
@@ -158,6 +164,17 @@
 					</div>
 					<div class="col-sm-1">
 						<input type="text" name="gp3"  id="gp3" class="form-control input-sm" value="{{$data_mast->gp3}}">
+					</div>
+					<div class="col-sm-1 col-sm-offset-1">
+						<label >Ship To</label>
+					</div>
+
+					<div class="col-sm-2">
+						<select class="form-control " id="ship_to" name="ship_to">
+						          <option value="HM" <?php if($data_mast->ship_to=="HM") { echo "selected"; } ?>>HM - บ้าน</option>
+						          <option value="DL" <?php if($data_mast->ship_to=="DL") { echo "selected"; } ?>>DL - ห้าง</option>
+						</select>
+						
 					</div>
 
 					</div>

@@ -101,7 +101,7 @@ return [
 	        ),
 
 	        # Our secondary database connection
-	       /* 'mysql2' => array(
+	        /*'mysql2' => array(
 	            'driver'    => 'mysql',
 	            'host'      => '192.168.9.44',
 	            'database'  => 'cosdb',
@@ -122,7 +122,7 @@ return [
 	            'collation' => 'utf8_general_ci',
 	            'prefix'    => '',
 	        ),	
-	        'mysql3' => array(
+	        /*'mysql3' => array(
 	            'driver'    => 'mysql',
 	            'host'      => 'cosjaspalhome.com',
 	            'database'  => 'cosjaspa_cosdb',
@@ -131,7 +131,7 @@ return [
 	            'charset'   => 'utf8',
 	            'collation' => 'utf8_general_ci',
 	            'prefix'    => '',
-	        ),
+	        ),*/
 	    ),
 
 	/*

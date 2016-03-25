@@ -167,6 +167,7 @@ class PromotionController extends Controller {
 				'pmt_type'		=> Request::input('txtPmtTypeKey'),
 				'gp_amt'		=> Request::input('txtGpAmtKey'),
 				'dept_code'	=>$dept_code,
+				'approve_status' => 'PENDING',  //PENDING , APPROVED , CANCEL
 				'rec_status'		=> Request::input('txtRecStatusKey'),
 				'created_at'		=> date('Y-m-d H:i:s'),
 				'created_by'		=> $created_by

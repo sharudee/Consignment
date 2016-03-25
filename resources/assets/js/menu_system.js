@@ -175,6 +175,9 @@ $(function(){
 					// ปิด modal
 					$(".systemmodal").modal('hide');
 					window.location.href = "getsystemlist";
+				}else
+				{
+					swal("เพิ่มข้อมูล ไม่สำเร็จ!", "กรุณาระบุ รหัสระบบ ใหม่อีกครั้ง", "error");
 				}
 			},
 

@@ -82,10 +82,10 @@ class PmtTrnsGrpMastController extends Controller {
                 ->orWhere('rec_status', 'LIKE', "%$query%")
                 ->paginate(10);
         } else {
-            $dictionaries = PmtGroupMastModel::orderBy('transaction_code', 'desc')->paginate(10);
+            $dictionaries = PmtGroupMastModel::orderBy('pmt_group_code', 'desc')->paginate(10);
         }
 
-        return view('promotion.pmttrnsmast')->with('pmttrnsmast_obj',$dictionaries);
+        return view('promotion.pmtgrpmast')->with('pmtgrpmast_obj',$dictionaries);
     }
 
 

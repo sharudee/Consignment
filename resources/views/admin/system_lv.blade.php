@@ -34,7 +34,7 @@
 				<button type="button" class="btn btn-danger btn-sm solsoShowModal"  
 				data-toggle="modal" data-target="#solsoCrudModal"  
 				data-href="{{URL::to('deletesystemform/'.$v->Su_System_Id.'/')}}" data-modal-title="ลบข้อมูล การกำหนดหมวดระบบ">
-				<i class="fa fa-pencil"></i>ลบ</button>
+				<i class="fa fa-trash"></i>ลบ</button>
 
 		</td>
 

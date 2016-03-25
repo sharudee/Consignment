@@ -13,8 +13,8 @@ use DB;
 use MPDF;
 
 // Model
-use App\Http\Model\Pcwork;
-use App\Http\Model\Pcmast;
+use App\Http\Model\CosPcwork;
+use App\Http\Model\CosPcmast;
 
 class PcworkController extends Controller {
 
@@ -25,9 +25,21 @@ class PcworkController extends Controller {
 	 */
 	public function index($emp_code)
 	{
-		$data_pc = Pcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->orderBy('work_date','asc')->get();
+		if($emp_code=='pctime')
+		{
+			return view('commission.pctime');
+		}
 
-		$pc = Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->get(['emp_name']);
+		if($emp_code=='pc')
+		{
+			$data_pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code','asc')->get();
+			return view('commission.pc')->with('pc',$data_pc);
+		}
+
+
+		$data_pc = CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->orderBy('work_date','asc')->get();
+
+		$pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->get(['emp_name']);
 		//dd($pc);
 		
 		return view('commission.pcwork')->with(array('pcwork'=>$data_pc,
@@ -93,7 +105,7 @@ class PcworkController extends Controller {
 				
 			
 				//Insert data to model Entity
-				$add_data = Pcwork::create($data_pc);
+				$add_data = CosPcwork::create($data_pc);
 			}
 			//dd($data_entity);
 			
@@ -103,7 +115,7 @@ class PcworkController extends Controller {
 
 			// Reload Table Data
 			$data_pc = array(
-				'pcwork' 		=> Pcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code', Request::get('emp_code'))->orderBy('work_date', 'asc')->get(),
+				'pcwork' 		=> CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code', Request::get('emp_code'))->orderBy('work_date', 'asc')->get(),
 				'refresh'		=> true
 			);
 	
@@ -139,7 +151,7 @@ class PcworkController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$edit_data = Pcwork::find($id);
+		$edit_data = CosPcwork::find($id);
 
 		return view('commission.pcwork_edit')->with('pcwork',$edit_data);
 	}
@@ -182,7 +194,7 @@ class PcworkController extends Controller {
 			);
 
 
-			$pc 	=Pcwork::find($id);
+			$pc 	=CosPcwork::find($id);
 			$pc->update($data_pc);
 
 			//dd($data_entity);
@@ -193,7 +205,7 @@ class PcworkController extends Controller {
 
 			// Reload Table Data
 			$data_pc = array(
-				'pcwork' 		=> Pcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code', Request::get('emp_code'))->orderBy('work_date', 'asc')->get(),
+				'pcwork' 		=> CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code', Request::get('emp_code'))->orderBy('work_date', 'asc')->get(),
 				'refresh'		=> true
 			);
 	
@@ -305,7 +317,7 @@ class PcworkController extends Controller {
 
 				if(empty($time))
 				{
-					$pc 	=Pcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('work_date',date('Y-m-d'))->where('emp_code',$emp_code);
+					$pc 	=CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('work_date',date('Y-m-d'))->where('emp_code',$emp_code);
 					$pc->update(array('time_start' => $time_start , 'updated_by' => $updated_by));
 
 					if($pc)
@@ -349,7 +361,7 @@ class PcworkController extends Controller {
 
 				if(empty($time))
 				{
-					$pc 	=Pcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('work_date',date('Y-m-d'))->where('emp_code',$emp_code);
+					$pc 	=CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('work_date',date('Y-m-d'))->where('emp_code',$emp_code);
 					$pc->update(array('time_end' => $time_end , 'updated_by' => $updated_by));
 
 					if($pc)

@@ -67,26 +67,55 @@
             </div> 
 
 </div>
-
 @include('modals.modal-crud-comm')
-
-    <!-- Modal Customer -->
-
-	<div class="modal fade systemmodal" data-backdrop="static">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content" id="systemmodal">
-				
-			</div>
-		</div>
-	</div>
-
-
-    <div class="modal fade consignnee_modal" data-backdrop="static">
+    <div class="modal fade usermodal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="consignnee_modal">
+            <div class="modal-content" id="usermodal">
                 
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade popup_role_modal" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" id="popup_role_modal">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade popup_entity_modal" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" id="popup_entity_modal">
+                
+            </div>
+        </div>
+    </div>  
+
+    <div class="modal fade popup_cust_modal2" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" id="popup_cust_modal2">
+                
+            </div>
+        </div>
+    </div>  
+
+    <div class="modal fade popup_dept_modal" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" id="popup_dept_modal">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade consignnee_grp_modal" data-backdrop="static">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" id="consignnee_grp_modal">
+                
+            </div>
+        </div>
+    </div>
+
 
 @stop

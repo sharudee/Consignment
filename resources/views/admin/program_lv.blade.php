@@ -32,7 +32,7 @@
 				<button type="button" class="btn btn-danger btn-sm solsoShowModal"  
 				data-toggle="modal" data-target="#solsoCrudModal"  
 				data-href="{{URL::to('deleteprogramform/'.$v->Su_ProgramList_Id.'/')}}" data-modal-title="ลบข้อมูล การกำหนดโปรแกรม">
-				<i class="fa fa-pencil"></i>ลบ</button>
+				<i class="fa fa-trash"></i>ลบ</button>
 		</td>
 
 		</tr>

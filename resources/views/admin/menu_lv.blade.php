@@ -29,11 +29,11 @@
 
 		
 		<td class="col-xs-1 col-sm-1 col-md-1">
-			<form class="formDelete" method="POST"  action="system-del" enctype="multipart/form-data">
-				<input id= "_token" type="hidden" name="_token" value="{{ csrf_token() }}" />
-				<input id= "deleteID" type="hidden" name="deleteID" value="{{$v->Su_Menu_Id}}" />
-				<button type="submit" class="btn btn-danger btn-sm solsoConfirm"> <i class="fa fa-trash"></i>ลบ</button>	
-			</form>
+
+				<button type="button" class="btn btn-danger btn-sm solsoShowModal"  
+				data-toggle="modal" data-target="#solsoCrudModal"   rel="editmenu"
+				data-href="{{URL::to('deletemenuform/'.$v->Su_Menu_Id.'/')}}" data-modal-title="ลบข้อมูล กำหนดเมนู">
+				<i class="fa fa-trash"></i>ลบ</button>
 
 		</td>
 

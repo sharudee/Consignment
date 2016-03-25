@@ -183,7 +183,7 @@ $(function(){
 		var pm_price = parseFloat($('input[name=pmprice]').val());
 		var tot_pm = pm_price + discamt;
 
-		if(disccode=='DISC-CASH')
+		if(disccode != 'DISC-PM')
 		{
 			$('input[name=disc_amt]').val(discamt);
 		}
@@ -407,7 +407,7 @@ $(function(){
 		if(total > pmprice)
 		{
 			//alert("มูลค่าของแถมเกินที่กำนหด");
-			swal("Error!", "มูลค่าของแถมเกินที่กำนหด!", "error");
+			swal("Error!", "มูลค่าของแถมเกินที่กำหนด!", "error");
 			return false;
 		}
 		$("input[name='pmsetprice']").val(total);
@@ -571,6 +571,15 @@ $(function(){
 			$('form input[name="ship_address2"]').focus();
 			$("span#ship_address2").addClass("error");
 			$("span#ship_address2").text('ข้อมูลเกิน 50 ตัวอักษร');
+			//swal("Warning!", "ต้องใส่ข้อมูล", "warning");
+			return false;
+		}
+
+		if($('input[name="ref_no"]').val().length > 20)
+		{
+			$('form input[name="ref_no"]').focus();
+			$("span#ref_no").addClass("error");
+			$("span#ref_no").text('ข้อมูลเกิน 20 ตัวอักษร');
 			//swal("Warning!", "ต้องใส่ข้อมูล", "warning");
 			return false;
 		}
@@ -852,6 +861,14 @@ $(function(){
 			return false;
 		}
 
+		if($('input[name="ref_no"]').val().length > 20)
+		{
+			$('form input[name="ref_no"]').focus();
+			$("span#ref_no").addClass("error");
+			$("span#ref_no").text('ข้อมูลเกิน 20 ตัวอักษร');
+			//swal("Warning!", "ต้องใส่ข้อมูล", "warning");
+			return false;
+		}
 
 		if($('form input[name="prov_name"]').val() == "")
 		{
@@ -924,10 +941,12 @@ $(function(){
 			var post_code = $("input#post_code").val();
 			var tel = $("input#tel").val();
 			var email_address = $("input#email").val();
+			var ref_no = $("input#ref_no").val();
 			//var po_file = $("input:file#po").val();
 			var gp1 = $("input#gp1").val();
 			var gp2 = $("input#gp2").val();
 			var gp3 = $("input#gp3").val();
+			var ship_to = $("select#ship_to").val();
 			var pay_code = $("input#pay_code").val();
 			var pay_name = $("input#pay_name").val();
 			var disc_amt = $("input#disc_amt").val();
@@ -1038,9 +1057,11 @@ $(function(){
 					post_code:post_code,
 					tel:tel,
 					email_address:email_address,
+					ref_no:ref_no,
 					gp1:gp1,
 					gp2:gp2,
 					gp3:gp3,
+					ship_to:ship_to,
 					pay_code:pay_code,
 					pay_name:pay_name,
 					disc_amt:disc_amt,
@@ -1114,10 +1135,12 @@ $(function(){
 		var post_code = $("input#post_code").val();
 		var tel = $("input#tel").val();
 		var email_address = $("input#email").val();
+		var ref_no = $("input#ref_no").val();
 		var po_file = $("input#po_file").val();
 		var gp1 = $("input#gp1").val();
 		var gp2 = $("input#gp2").val();
 		var gp3 = $("input#gp3").val();
+		var ship_to = $("select#ship_to").val();
 		var pay_code = $("input#pay_code").val();
 		var pay_name = $("input#pay_name").val();
 		var can = $("input#can:checked").val();
@@ -1226,9 +1249,11 @@ $(function(){
 				post_code:post_code,
 				tel:tel,
 				email_address:email_address,
+				ref_no:ref_no,
 				gp1:gp1,
 				gp2:gp2,
 				gp3:gp3,
+				ship_to:ship_to,
 				pay_code:pay_code,
 				pay_name:pay_name,
 				can:can,

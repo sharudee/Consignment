@@ -98,7 +98,7 @@ class MenuController extends Controller {
 				//return  $tmp  ;
 				//contentmenu
 
-		return view::make('include.sidebar_lv')->with('contentmenu',$tmp); 
+		return redirect('/');//->with('contentmenu','TEST'); 
 	}
 
 
@@ -106,21 +106,29 @@ class MenuController extends Controller {
 	//-----------Form NEW --------------------
 	public function geteditmenuform($Su_Menu_Id)
 	{
-		$data_obj =	DB::table('su_menu')
-			            	->where('Su_Menu_Id', '=', $Su_Menu_Id)
-			                ->get();
+        $data_obj_info = DB::table('su_menu')
+			            ->join('su_system', 'su_menu.Su_System_Id', '=', 'su_system.Su_System_Id')
+			            ->join('su_programlist', 'su_menu.ProgramCode', '=', 'su_programlist.ProgramCode')
+			            ->select('su_menu.*','su_system.*' ,'su_programlist.*' ,'su_menu.Su_System_Id')
+			            ->where ('Su_Menu_Id','=',$Su_Menu_Id)
+			            ->get();
 
-		return  view('admin.menu_form_edit')->with('data_obj',$data_obj);
+
+		return  view('admin.menu_form_edit')->with('data_obj',$data_obj_info);
 	}
 
 
 	public function getdeletemenuform($Su_Menu_Id)
 	{
-		$data_obj =	DB::table('su_menu')
-			            	->where('Su_Menu_Id', '=', $Su_Menu_Id)
-			                ->get();
+        $data_obj_info = DB::table('su_menu')
+			            ->join('su_system', 'su_menu.Su_System_Id', '=', 'su_system.Su_System_Id')
+			            ->join('su_programlist', 'su_menu.ProgramCode', '=', 'su_programlist.ProgramCode')
+			            ->select('su_menu.*','su_system.*' ,'su_programlist.*' ,'su_menu.Su_System_Id')
+			            ->where ('Su_Menu_Id','=',$Su_Menu_Id)
+			            ->get();
 
-		return  view('admin.menu_form_delete')->with('data_obj',$data_obj);
+
+		return  view('admin.menu_form_delete')->with('data_obj',$data_obj_info);
 	}
 
 
@@ -161,6 +169,8 @@ class MenuController extends Controller {
 	{
 		$username = Auth::user()->username ;
 		$Su_Menu_Id = Request::input('Su_Menu_Id');
+
+
 		if(!empty(Request::input('MenuName')))
 		{
 			$data_head = array(

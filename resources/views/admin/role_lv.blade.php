@@ -32,7 +32,7 @@
 				<button type="button" class="btn btn-danger btn-sm solsoShowModal"  
 				data-toggle="modal" data-target="#solsoCrudModal"  
 				data-href="{{URL::to('deleteroleform/'.$v->Su_Role_id.'/')}}" data-modal-title="ลบข้อมูล กำหนดสิทธิ์">
-				<i class="fa fa-pencil"></i>ลบ</button>
+				<i class="fa fa-trash"></i>ลบ</button>
 
 
 		</td>

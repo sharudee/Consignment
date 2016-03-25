@@ -12,7 +12,7 @@ use Validator;
 //use Input;
 
 // Model
-use App\Http\Model\Pcmast;
+use App\Http\Model\CosPcmast;
 
 class PcController extends Controller {
 
@@ -23,7 +23,7 @@ class PcController extends Controller {
 	 */
 	public function index()
 	{
-		$data_pc = Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code','asc')->get();
+		$data_pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code','asc')->get();
 
 		
 		return view('commission.pc')->with('pc',$data_pc);
@@ -85,7 +85,7 @@ class PcController extends Controller {
 			
 		
 			//Insert data to model Entity
-			$add_data = Pcmast::create($data_pc);
+			$add_data = CosPcmast::create($data_pc);
 
 			//dd($data_entity);
 			
@@ -95,7 +95,7 @@ class PcController extends Controller {
 
 			// Reload Table Data
 			$data_pc = array(
-				'pc' 		=> Pcmast::where('cust_code',Auth::user()->current_cus_code_logon)->orderBy('emp_code', 'asc')->get(),
+				'pc' 		=> CosPcmast::where('cust_code',Auth::user()->current_cus_code_logon)->orderBy('emp_code', 'asc')->get(),
 				'refresh'	=> true
 			);
 	
@@ -131,7 +131,7 @@ class PcController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$edit_data = Pcmast::find($id);
+		$edit_data = CosPcmast::find($id);
 
 		return view('commission.pc_edit')->with('pc',$edit_data);
 
@@ -177,7 +177,7 @@ class PcController extends Controller {
 			);
 
 
-			$pc 	=Pcmast::find($id);
+			$pc 	=CosPcmast::find($id);
 			$pc->update($data_pc);
 
 			//dd($data_entity);
@@ -188,7 +188,7 @@ class PcController extends Controller {
 
 			// Reload Table Data
 			$pc = array(
-				'pc' 		=> Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code', 'asc')->get(),
+				'pc' 		=> CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code', 'asc')->get(),
 				'refresh'	=> true
 			);
 	
@@ -225,10 +225,10 @@ class PcController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$delete=Pcmast::where('id',$id)->delete();
+		$delete=CosPcmast::where('id',$id)->delete();
 
 		$data_pc = array(
-				'pc' 		=> Pcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code', 'asc')->get(),
+				'pc' 		=> CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code', 'asc')->get(),
 				'refresh'	=> true
 			);
 	

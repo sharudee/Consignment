@@ -21,7 +21,7 @@
 			<td class="col-xs-12 col-sm-1 col-md-1">
 				<button type="button" class="btn btn-primary btn-sm solsoShowModal"  
 				data-toggle="modal" data-target="#solsoCrudModal" 
-				data-href="{{URL::to('getpmtdiscshopform/'.$v->id)}}" data-modal-title="ส่วนลดการซื้อสินค้าครบ (เลขที่โปรโมชั่น::{{$v->username}})" >
+				data-href="{{URL::to('rolemenu_form/'.$v->Su_Role_id)}}" data-modal-title="กำหนดสิทธิ์ การเข้าใช้เมนู (สิทธิ์::{{$v->username}})" >
 				<i class="fa fa-pencil"></i>แก้ไข</button>
 			</td>
 		</tr>

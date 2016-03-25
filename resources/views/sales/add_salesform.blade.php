@@ -146,7 +146,14 @@
 						</div>
 
 
-						
+					<div class="col-sm-1 ">
+						<label >Email</label>
+					</div>
+
+					<div class="col-sm-2">
+						<input type="email" name="email" id="email" class="form-control input-sm">
+						<p><span id='email'></span></p>
+					</div>	
 					 
 
 					  
@@ -164,12 +171,12 @@
 					</div>
 
 					<div class="col-sm-1 col-sm-offset-2">
-						<label >Email</label>
+						<label >Ref No.</label>
 					</div>
 
 					<div class="col-sm-2">
-						<input type="email" name="email" id="email" class="form-control input-sm">
-						<p><span id='email'></span></p>
+						<input type="text" name="ref_no" id="ref_no" class="form-control input-sm">
+						<p><span id='ref_no'></span></p>
 					</div>
 				</div>
 
@@ -215,8 +222,18 @@
 						<p><span id='gp3'></span></p>
 					</div>
 
+					<div class="col-sm-1 col-sm-offset-1">
+						<label >Ship To</label>
 					</div>
 
+					<div class="col-sm-2">
+						<select class="form-control required" id="ship_to" name="ship_to">
+						          <option value="HM">HM - บ้าน</option>
+						          <option value="DL">DL - ห้าง</option>
+						</select>
+						
+					</div>
+					</div>
 					
 
 				</div>

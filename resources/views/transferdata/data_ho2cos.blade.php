@@ -28,7 +28,7 @@
 						<tr>
 							<td>{{$dbarr->doc_no }}</td>						
 							<td>{{Carbon::parse($dbarr->doc_date)->format('d/m/Y') }}</td>
-							<td>{{$dbarr->ship_titlename. $dbarr->ship_custname .' '. $dbarr->ship_custsurname}}</td>
+							<td>{{$dbarr->cust_name}}</td>
 							<td>{{Carbon::parse($dbarr->req_date)->format('d/m/Y') }}</td>
 							<td>{{$dbarr->pmt_no}}</td>
 							<td>{{$dbarr->doc_status}}</td>
@@ -50,7 +50,7 @@
 	
 		<div class="form-group">
 			<div class="col-sm-10 col-sm-offset-5">
-				<button type="button" class="btn btn-primary" id="Submitcos2ho"><i class="fa fa-sun-o"></i>ประมวลผล</button>
+				<button type="button" class="btn btn-primary" id="Submitho2cos"><i class="fa fa-sun-o"></i>ประมวลผล</button>
 			</div>
 		</div>
 	</form>

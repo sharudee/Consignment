@@ -23,6 +23,8 @@
 <script src="<?php echo URL::to('resources/assets/js/custom_commission.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_incentive.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_pc.js');?>"></script>
+<script src="<?php echo URL::to('resources/assets/js/custom_report.js');?>"></script>
+<script src="<?php echo URL::to('resources/assets/js/custom_transfer.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_customer.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_promotion.js');?>"></script> 
@@ -40,13 +42,12 @@
 <script src="<?php echo URL::to('resources/assets/js/custom_pmtdiscshop.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/custom_pmtdiscpay.js');?>"></script>
 
-<script src="<?php echo URL::to('resources/assets/js/custom_transfer.js');?>"></script>
-
 <script src="<?php echo URL::to('resources/assets/js/bootstrap-datetimepicker.min.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/bootstrap-datepicker.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo URL::to('resources/assets/js/jquery-ui.min.js'); ?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/jquery-ui-timepicker-addon.js');?>"></script> 
 <script src="<?php echo URL::to('resources/assets/js/jquery-ui-sliderAccess.js');?>"></script> 
+
 
 
 <script src="<?php echo URL::to('resources/assets/js/menu_system.js');?>"></script>
@@ -56,7 +57,6 @@
 <script src="<?php echo URL::to('resources/assets/js/menu_user.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/menu_rolemenu.js');?>"></script>
 <script src="<?php echo URL::to('resources/assets/js/menu_entityuser.js');?>"></script>
-
 
 </body>
 </html>

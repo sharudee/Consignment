@@ -58,10 +58,8 @@
                 </div>
  
 
-  <!--       <a href="#" rel="newconsignnee" class="btn btn-md btn-primary"><i class="fa fa-plus-square-o"></i>เพิ่มข้อมูล ห้าง</a> -->
- <!--        <legend></legend> -->
-            <a href="#" rel="newuser" class="btn btn-md btn-primary"><i class="fa fa-plus-square-o"></i>เพิ่มข้อมูล</a>
-            <legend></legend>
+
+
             <div id="ajaxTable" class="table-responsive top10">
                 @include('admin.entityuser_lv') 
             </div> 
@@ -71,6 +69,28 @@
 @include('modals.modal-crud-comm')
 
     <!-- Modal Customer -->
+    <div class="modal fade pop_cust_allow_form" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="pop_cust_allow_form">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade cust_modal" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="cust_modal">
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal fade popup_entity_modal" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="popup_entity_modal">
+                
+            </div>
+        </div>
+    </div>  
 
     <div class="modal fade consignnee_grp_modal" data-backdrop="static">
         <div class="modal-dialog modal-lg">
@@ -79,12 +99,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade consignnee_modal" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="consignnee_modal">
-                
-            </div>
-        </div>
-    </div>
+
+
+
 
 @stop

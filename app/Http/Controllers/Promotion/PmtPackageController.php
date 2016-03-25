@@ -136,8 +136,39 @@ class PmtPackageController extends Controller {
 															,'data_obj_package_det_info'=>$data_obj_package_det_info]); 
 	}
 
+	public function loadfordeletepmtpackageform($pmt_mast_id ,$package_mast_id )
+	{
+
+        $data_obj_info = DB::table('pmt_mast')
+			            ->select('pmt_mast.*')
+			            ->where('pmt_mast_id', '=', "$pmt_mast_id")
+			            ->get();
+
+		$data_obj_package_mast_info = DB::table('pmt_package_mast')
+						->join('pmt_product_set', 'pmt_package_mast.pmt_product_set_id', '=', 'pmt_product_set.pmt_product_set_id')
+			            ->select('pmt_package_mast.*','pmt_product_set.product_set_code','pmt_product_set.product_set_desc')
+			            ->where('package_mast_id', '=', "$package_mast_id")
+			            ->get();
+
+
+			            
+		$data_obj_package_det_info = DB::table('pmt_package_det')
+						->join('pmt_product_set', 'pmt_product_set.pmt_product_set_id', '=', 'pmt_package_det.pmt_product_set_id')
+						->select('pmt_package_det.*','pmt_product_set.product_set_code','pmt_product_set.product_set_desc')
+			            ->where('pmt_package_det.package_mast_id', '=', "$package_mast_id")
+			            ->get();
+
+		return view('promotion.pmtpackageform_delete')->with(['pmt_mast_id_obj_info'=>$data_obj_info
+															,'data_obj_package_mast_info'=>$data_obj_package_mast_info
+															,'data_obj_package_det_info'=>$data_obj_package_det_info]); 
+	}
+
+
 	public function loadforeditpmtpackageformDelete($pmt_mast_id ,$package_mast_id )
 	{
+		
+
+
 
         $data_obj_info = DB::table('pmt_mast')
 			            ->select('pmt_mast.*')
@@ -169,6 +200,15 @@ class PmtPackageController extends Controller {
 		$getpmt_mast_id_key  = Request::input('pmt_mast_id_key'); 
 		$getpackage_mast_id =   Request::input('package_mast_id');  
 
+		$chk_approve_pmt = DB::table('pmt_mast')
+			            ->where('pmt_mast_id', '=', $pmt_mast_id)
+			            ->first();
+		//-----ถ้ามีค่า แสดงว่าต้องไม่สามารถ แก้ไขอะไรได้อีก
+	
+		if ($chk_approve_pmt->approve_status == "APPROVED" OR $chk_approve_pmt->approve_status =="CANCEL") 
+		{
+			return $chk_approve_pmt->approve_status;
+		}	
 
 
 			if(!empty($getpackage_mast_id  ))
@@ -191,6 +231,7 @@ class PmtPackageController extends Controller {
 				$getproduct_set_desc = Request::input('product_set_desc'); 
 				$getset_price_amt = Request::input('set_price_amt'); 
 				$getset_qty  = Request::input('set_qty'); 
+				$pm_total_price  = Request::input('pm_total_price'); 
 				$getuom = Request::input('uom');
 				
 				
@@ -218,7 +259,7 @@ class PmtPackageController extends Controller {
 						  'special2_disc_amt1' => 0.00,
 						  'special2_disc_amt2' => 0.00,
 						  'special2_price_amt' => $get_special2_price_amt_h,
-						  'pm_total_price'=> 0.00,
+						  'pm_total_price'=> $pm_total_price,
 						  'rec_status' => 'ACTIVE',
 						  'created_by'		=> 'admin',
 						  'created_at'		=> date('Y-m-d H:i:s')
@@ -271,7 +312,15 @@ class PmtPackageController extends Controller {
 		$getpmt_mast_id_key  = Request::input('pmt_mast_id_key'); 
 		$getpackage_mast_id =   Request::input('package_mast_id');  
 
-
+		$chk_approve_pmt = DB::table('pmt_mast')
+			            ->where('pmt_mast_id', '=', $pmt_mast_id)
+			            ->first();
+		//-----ถ้ามีค่า แสดงว่าต้องไม่สามารถ แก้ไขอะไรได้อีก
+	
+		if ($chk_approve_pmt->approve_status == "APPROVED" OR $chk_approve_pmt->approve_status =="CANCEL") 
+		{
+			return "Insert_No_Success";
+		}	
 			if(!empty($getpackage_mast_id  ))
 			{
 
@@ -315,6 +364,7 @@ class PmtPackageController extends Controller {
 				$getproduct_set_desc = Request::input('product_set_desc'); 
 				$getset_price_amt = Request::input('set_price_amt'); 
 				$getset_qty  = Request::input('set_qty'); 
+				$pm_total_price  = Request::input('pm_total_price'); 
 				$getuom = Request::input('uom');
 				
 				
@@ -342,7 +392,7 @@ class PmtPackageController extends Controller {
 						  'special2_disc_amt1' => 0.00,
 						  'special2_disc_amt2' => 0.00,
 						  'special2_price_amt' => $get_special2_price_amt_h,
-						  'pm_total_price'=> 0.00,
+						  'pm_total_price'=> $pm_total_price,
 						  'rec_status' => 'ACTIVE',
 						  'created_by'		=> 'admin',
 						  'created_at'		=> date('Y-m-d H:i:s')

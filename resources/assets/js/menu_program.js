@@ -170,6 +170,9 @@ $(function(){
 					// ปิด modal
 					$(".programmodal").modal('hide');
 					window.location.href = "getprogramlist";
+				}else
+				{
+					swal("เพิ่มข้อมูล ไม่สำเร็จ!", "กรุณาระบุ รหัสโปรแกรม ใหม่อีกครั้ง", "error");
 				}
 			},
 

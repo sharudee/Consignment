@@ -69,6 +69,19 @@ class ProgramController extends Controller {
 	{
 
 		$username = Auth::user()->username ;
+
+		$ProgramCode = Request::input('ProgramCode');
+		$check 	= DB::table('su_programlist')
+			            ->where ('ProgramCode','=',$ProgramCode)
+			            ->first();
+
+
+		if ( $check <> NULL) 
+		{
+			return "Insert_No_Success";
+		}	            
+
+
 		if(!empty(Request::input('ProgramCode')))
 		{
 			$data_head = array(

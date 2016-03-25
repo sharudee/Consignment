@@ -72,7 +72,7 @@
 							<td>
 								 <button type="button" class="btn btn-sm btn-info solsoShowModal"  
 								data-toggle="modal" data-target="#solsoCrudModal" 
-								data-href="{{URL::to('salesfile/'.$dbarr->id)}}" data-modal-title="PO File" >
+								data-href="{{URL::to('salesfile/'.$dbarr->id)}}" data-modal-title="PO File"  {{$edit_st}}>
 								 PO File</button>
 							</td>
 						</tr>

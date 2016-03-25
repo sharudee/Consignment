@@ -71,6 +71,19 @@ class RoleController extends Controller {
 	public function summitnewrole()
 	{
 		$username = Auth::user()->username ;
+
+		$RoleName = Request::input('RoleName');
+		$check 	= DB::table('su_role')
+			            ->where ('RoleName','=',$RoleName)
+			            ->first();
+
+
+		if ( $check <> NULL) 
+		{
+			return "Insert_No_Success";
+		}	            
+
+
 		if(!empty(Request::input('RoleName')))
 		{
 			$data_head = array(

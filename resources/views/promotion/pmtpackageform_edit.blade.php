@@ -90,15 +90,23 @@
 						<input type="text" id="special2_price_amt" name="special2_price_amt" class="form-control input-sm" value="{{$h->special2_price_amt}}"  >
 					</div>
 				</div>
+				<div class="row form-group">	
+					 <div class="col-sm-1">
+						<label >มูลค่าของแถม</label>
+					</div>
+
+					<div class="col-sm-2">
+						<input type="text" id="pm_total_price" name="pm_total_price" class="form-control input-sm" value="{{$h->pm_total_price}}"  >
+					</div> 
+					<div class="col-sm-1">
+						<a href="#" rel="click_premuim_set" class="btn btn-primary btn-md"><i class="fa fa-search"></i>เลือก ชุดของแถม</a>
+					</div>
+				</div>
 	</div>
 
 
 				<input type ="hidden" name="_token"  value="{{csrf_token()}}">
-	<div class="row form-group top5">
-		<div class="col-sm-2">
-			<a href="#" rel="click_premuim_set" class="btn btn-primary"><i class="fa fa-search"></i>เลือก ชุดของแถม</a>
-		</div>
-	</div>
+
 </form>	
 @endforeach
 	

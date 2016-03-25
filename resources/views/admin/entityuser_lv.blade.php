@@ -19,7 +19,7 @@
 			<td class="col-xs-1 col-sm-1 col-md-1">
 				<button type="button" class="btn btn-primary btn-sm solsoShowModal"  
 				data-toggle="modal" data-target="#solsoCrudModal" 
-				data-href="{{URL::to('getpmtdiscshopform/'.$v->id)}}" data-modal-title="ส่วนลดการซื้อสินค้าครบ (เลขที่โปรโมชั่น::{{$v->username}})" >
+				data-href="{{URL::to('getentityuserform/'.$v->id)}}" data-modal-title="กำหนดสิทธิ์การเข้าทำงาน กลุ่มข้อมูล ห้าง-ร้าน (รหัสผู้ใช้ :: {{$v->username}})" >
 				<i class="fa fa-pencil"></i>Entity,ห้าง-ร้าน</button>
 			</td>
 		</tr>

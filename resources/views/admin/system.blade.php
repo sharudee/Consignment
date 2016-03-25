@@ -67,7 +67,7 @@
 
 </div>
 
-
+@include('modals.modal-crud-comm')
     <!-- Modal Customer -->
 
 	<div class="modal fade systemmodal" data-backdrop="static">
@@ -78,5 +78,4 @@
 		</div>
 	</div>
 
-@include('modals.modal-crud-comm')
 @stop

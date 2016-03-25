@@ -81,6 +81,16 @@
 						<input type="text" id="special2_price_amt" name="special2_price_amt" class="form-control input-sm" value="{{$h->special2_price_amt}}"  readonly>
 					</div>
 				</div>
+				<div class="row form-group">	
+					 <div class="col-sm-1">
+						<label >มูลค่าของแถม</label>
+					</div>
+
+					<div class="col-sm-2">
+						<input type="text" id="pm_total_price" name="pm_total_price" class="form-control input-sm" value="{{$h->pm_total_price}}" readonly >
+					</div> 
+
+				</div>
 	</div>
 
 

@@ -27,7 +27,7 @@
                                                     <label class="control-label">รหัส/ชื่อกลุ่ม</label>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-8 col-md-8">
-                                                    <input type="text"  class="form-control" name="cboShEntityBranch"  >
+                                                    <input type="text"  class="form-control" name="search"  >
                                                 </div>
                                             </div>
                                         </div>

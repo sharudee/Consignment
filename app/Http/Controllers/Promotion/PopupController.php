@@ -65,7 +65,7 @@ class PopupController extends Controller {
 						->get();
 		return view('popup.popup_transmst_modal')->with('data_obj_info',$data_obj_info);
 	} 
-	
+
 }
 
 
