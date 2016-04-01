@@ -75,6 +75,8 @@ Route::get('productsize2','ReportController@productsize2');
 Route::get('productcode1/{brand1}/{brand2}/{design1}/{design2}/{color1}/{color2}/{size1}/{size2}','ReportController@productcode1');
 Route::get('productcode2/{brand1}/{brand2}/{design1}/{design2}/{color1}/{color2}/{size1}/{size2}','ReportController@productcode2');
 
+Route::get('rpt_promotion/{id}','Report\RptpromotionContoller@rpt_promotion'); 
+
 Route::get('salereport','ReportController@salereport');
 Route::post('saleprint','ReportController@saleprint');
 Route::get('saleentity1','ReportController@saleentity1');

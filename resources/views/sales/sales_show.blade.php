@@ -156,16 +156,16 @@
 					<div class="col-sm-1">
 						<label>GP</label>
 					</div>
-					<div class="col-sm-1">
-						<input type="text" name="gp1"  id="gp1" class="form-control input-sm" value="{{$data_mast->gp1}}">
-					</div>
+					
+						<input type="hidden" name="gp1"  id="gp1" class="form-control input-sm" value="{{$data_mast->gp1}}">
+					
 					<div class="col-sm-1">
 						<input type="text" name="gp2"  id="gp2" class="form-control input-sm" value="{{$data_mast->gp2}}">
 					</div>
 					<div class="col-sm-1">
 						<input type="text" name="gp3"  id="gp3" class="form-control input-sm" value="{{$data_mast->gp3}}">
 					</div>
-					<div class="col-sm-1 col-sm-offset-1">
+					<div class="col-sm-1 col-sm-offset-2">
 						<label >Ship To</label>
 					</div>
 
@@ -192,13 +192,13 @@
 		<table class='table table-bordered' id='po_table'>
 			<thead>	
 				<tr>
-					<th>Item</th>
-					<th>Product Code</th>
-					<th>Product Name</th>
-					<th>Qty</th>
-					<th>Price</th>
-					<th>Amount</th>
-					<th>Special Size</th>
+					<th>ลำดับ</th>
+					<th>รหัสสินค้า</th>
+					<th>รายการสินค้า</th>
+					<th>จำนวน</th>
+					<th>ราคา</th>
+					<th>จำนวน</th>
+					<th>ขนาดพิเศษ</th>
 					
 				</tr>
 			</thead>		

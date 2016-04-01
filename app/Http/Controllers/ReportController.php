@@ -403,7 +403,7 @@ class ReportController extends Controller {
 			$doc_no2 = Request::Input('doc_no2');
 		}
 
-		$sql = "select  id , doc_code , doc_no , doc_date , cust_code , ref_no , created_by , created_at from cos_invmast  where cos_entity between '" . $entity1 . "' and '" . $entity2 . "' and cust_code between '" . $cust1 . "' and '" . $cust2 . "' and doc_date between '" . $doc_date1  . "'  and '" . $doc_date2. "' and doc_code between '" . $doc_code1 . "' and '" . $doc_code2 . "' and  doc_no between '" . $doc_no1 ."' and '" . $doc_no2 . "' order by doc_no";
+		$sql = "select  id , doc_code , doc_no , doc_date , cust_code , ref_no , created_by , created_at , tot_discamt , tot_netamt  from cos_invmast  where cos_entity between '" . $entity1 . "' and '" . $entity2 . "' and cust_code between '" . $cust1 . "' and '" . $cust2 . "' and doc_date between '" . $doc_date1  . "'  and '" . $doc_date2. "' and doc_code between '" . $doc_code1 . "' and '" . $doc_code2 . "' and  doc_no between '" . $doc_no1 ."' and '" . $doc_no2 . "' order by doc_no";
 		//dd($sql);
 		$data = DB::select($sql); 
 
@@ -454,13 +454,33 @@ class ReportController extends Controller {
 					<td width="150px" align="left"><font size="2">' . $dbdet->prod_code  . '</td>
 					<td width="300px" align="left"><font size="2">' . $dbdet->prod_name . '</td>	
 					<td width="80px" align="left" ><font size="3">' . $dbdet->uom_code. '</td>	
-					<td width="100px" align="right"><font size="3">' . $dbdet->sale_price . '</td>	
+					<td width="100px" align="right"><font size="3">' . number_format($dbdet->sale_price,2) . '</td>	
 					<td width="80px" align="right"><font size="3">' . $dbdet->qty . '</td>	
-					<td width="100px" align="right"><font size="3">' . $dbdet->amt . '</td>	
+					<td width="100px" align="right"><font size="3">' . number_format($dbdet->amt,2) . '</td>	
 					</tr>';	
 
 				}
-					
+				
+				$content = $content . '<tr>
+					<td width="20px" align="center" height="25"><font size="3"> </td>	
+					<td width="40px" align="center" height="25"><font size="3"></td>	
+					<td width="150px" align="left"><font size="2"></td>
+					<td width="300px" align="left"><font size="2"></td>	
+					<td width="80px" align="left" ><font size="3"></td>	
+					<td width="100px" align="right"><font size="3"></td>	
+					<td width="80px" align="right"><font size="3">ส่วนลด</td>	
+					<td width="100px" align="right"><font size="3">' . number_format($dbarr->tot_discamt,2) . '</td>	
+					</tr>';	
+				$content = $content . '<tr>
+					<td width="20px" align="center" height="25"><font size="3"> </td>	
+					<td width="40px" align="center" height="25"><font size="3"></td>	
+					<td width="150px" align="left"><font size="2"></td>
+					<td width="300px" align="left"><font size="2"></td>	
+					<td width="80px" align="left" ><font size="3"></td>	
+					<td width="100px" align="right"><font size="3"></td>	
+					<td width="80px" align="right"><font size="3">รวมทั้ั้งสิ้น</td>	
+					<td width="100px" align="right"><font size="3">' . number_format($dbarr->tot_netamt,2) . '</td>	
+					</tr>';		
 				
 				$content = $content . '</table></td></tr>';
 				$n++;	

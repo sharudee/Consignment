@@ -660,9 +660,9 @@ $(function(){
 		$('.rprod').each(function(){
 			var price = parseFloat($('td.c_price',this).text().replace(/^[^\d.]*/,''));
 			price = isNaN(price) ? 0 : price;
-			var qty = parseInt($('td.c_qty input',this).val());
+			var qty = parseFloat($('td.c_qty input',this).val());
 			var amt = qty * price;
-			$('td.c_amt',this).text(amt);
+			$('td.c_amt',this).text(amt.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
 
 		
 			});
