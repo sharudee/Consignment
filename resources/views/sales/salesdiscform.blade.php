@@ -15,17 +15,30 @@
 					
 					
 					@foreach($disc as $dbarr)
+					<?php
+					if($dbarr->discount_type=="BAHT")
+					{
+						$disc_amt = $dbarr->discount_amt;
+						$uom = "บาท";
+					}
+					else
+					{
+						$disc_amt = number_format($dbarr->discount_percen,2);
+						$uom = "%";
+					}
+
+					?>
 					<tr>
 						<td>
 							<div class="radio">
 								<label>
-									<input type="radio" name="raddisc" data-discamt="{{$dbarr->discount_amt}}"   value="{{$dbarr->transaction_code}}">
+									<input type="radio" name="raddisc" data-discamt="{{$disc_amt}}"  data-dicstype="{{$dbarr->discount_type}}"  value="{{$dbarr->transaction_code}}">
 									{{$dbarr->trnsaction_name}}
 								</label>
 							</div>
 						</td>
 						<td>{{$dbarr->purchase_rate_amt}}</td>
-						<td>{{$dbarr->discount_amt}}</td>
+						<td>{{$disc_amt . ' ' . $uom}}</td>
 					
 						
 					</tr>

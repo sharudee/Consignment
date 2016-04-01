@@ -1,4 +1,8 @@
 $(function(){
+	
+
+
+
 	// Event newpo Link
 	$("a[rel=newpo]").click(function(){
 		$.get('salesform',function(data){
@@ -65,6 +69,7 @@ $(function(){
 	});	
 
 
+   	//Search
    	
 
 	// Event submit Title
@@ -74,6 +79,8 @@ $(function(){
 		$('input[name=ship_titlename]').val(title);
 		$(".titlemodal").modal('hide');
 	});
+
+	//Serach Province
 
 
 	// Event Add Province Form
@@ -180,12 +187,55 @@ $(function(){
 	$('body').on('change','input[name="raddisc"]', function() {
 	  	var disccode = $('input[name=raddisc]:checked').val();
 		var discamt = parseFloat($('input[name=raddisc]:checked').attr('data-discamt'));
+		var disctype = $('input[name=raddisc]:checked').attr('data-dicstype');
 		var pm_price = parseFloat($('input[name=pmprice]').val());
 		var tot_pm = pm_price + discamt;
+		var tot_disc;
+		
+		var rows;
+		var total_qty = 0;
+		var total_amt = 0;
+		var amt = 0;
 
+		var pro_qty = [];
+		var pro_price = [];
+		var pro_amt = [];
 		if(disccode != 'DISC-PM')
 		{
-			$('input[name=disc_amt]').val(discamt);
+			
+			if(disctype=="BAHT")
+			{
+				$('input[name=disc_amt]').val(discamt);
+			}
+			else
+			{
+				
+				// เก็บจำนวนชิ้นลง array
+				$("input[name='qty[]']").each(function ()
+				{
+					pro_qty.push(parseInt($(this).val()));
+				});
+
+				// เก็บราคาแต่ละชิ้นลง array
+				$("input[name='price[]']").each(function ()
+				{
+					pro_price.push(parseInt($(this).val()));
+
+				});
+
+				
+
+				for(rows=1;rows<=pro_qty.length;rows++)
+				{
+					
+					
+					total_qty += pro_qty[(rows-1)];
+					total_amt += pro_qty[(rows-1)]*pro_price[(rows-1)];
+				}
+
+				tot_disc = total_amt * (discamt / 100);
+				$('input[name=disc_amt]').val(tot_disc);
+			}
 		}
 		else
 		{

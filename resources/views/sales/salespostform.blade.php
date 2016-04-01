@@ -1,10 +1,14 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title">Promotion</h4>
+	<h4 class="modal-title">รหัสไปรษณีย์</h4>
 </div>
 <div class="modal-body">
-	<table class="table table-border">
-				<tbody>
+	<input type="text" id="postsearch" placeholder="Type to search">
+	<br>
+	<br>
+
+	<table class="table table-border" id="postTable">
+
 					
 					@foreach($post as $dbarr)
 					<tr>
@@ -19,7 +23,7 @@
 						
 					</tr>
 					@endforeach					
-				</tbody>
+
 	</table>		
 </div>
 <div class="modal-footer">
@@ -27,3 +31,15 @@
 	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	
 </div>
+
+<script>
+var $rows = $('#postTable tr');
+	$('#postsearch').keyup(function() {
+	    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+	    $rows.show().filter(function() {
+	        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	        return !~text.indexOf(val);
+	    }).hide();
+	});	
+</script>

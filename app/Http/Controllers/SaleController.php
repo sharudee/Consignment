@@ -200,7 +200,7 @@ class SaleController extends Controller {
 
 	public function salesdiscform($pmt_no)
 	{
-		$sql = "select c.transaction_code , c.trnsaction_name ,purchase_rate_amt, b.discount_amt from pmt_mast a , pmt_disc_shop_rate b , pmt_transaction_mast c where a.pmt_mast_id = b.pmt_mast_id and a.pmt_no ='" . $pmt_no . "' and b.transaction_code=c.transaction_code ";
+		$sql = "select c.transaction_code , c.trnsaction_name ,purchase_rate_amt, b.discount_amt , b.discount_type , b.discount_percen from pmt_mast a , pmt_disc_shop_rate b , pmt_transaction_mast c where a.pmt_mast_id = b.pmt_mast_id and a.pmt_no ='" . $pmt_no . "' and b.transaction_code=c.transaction_code ";
 		
 		$data_disc = DB:: select($sql);
 		return view('sales.salesdiscform')->with('disc',$data_disc);

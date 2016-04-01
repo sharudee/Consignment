@@ -15,6 +15,7 @@ use MPDF;
 // Model
 use App\Http\Model\CosPcwork;
 use App\Http\Model\CosPcmast;
+use App\Http\Model\CosInvmast;
 
 class PcworkController extends Controller {
 
@@ -35,6 +36,7 @@ class PcworkController extends Controller {
 			$data_pc = CosPcmast::where('cust_code',Auth::user()->current_cust_code_logon)->orderBy('emp_code','asc')->get();
 			return view('commission.pc')->with('pc',$data_pc);
 		}
+
 
 
 		$data_pc = CosPcwork::where('cust_code',Auth::user()->current_cust_code_logon)->where('emp_code',$emp_code)->where('year',date('Y'))->where('month',date('m'))->orderBy('work_date','asc')->get();
